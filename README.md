@@ -20,8 +20,7 @@ npm start
 ```
 * installation de POSTMAN et test de l'API
 * création de l'arborescence des dossiers et fichiers de base du site via mon script perso dev_start.sh
-* depo des dossiers et fichiers du repo d'OC dans la racine du dossier du projet
 
 
 ## Dérouler du projet
-Les outils de base on été installés et les premiers cours sur JS suivis, début de la prise en main de l'API.
+Les outils de base on été installés et les premiers cours sur JS suivis, début de la prise en main de l'API

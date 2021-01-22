@@ -1,0 +1,19 @@
+{
+  "name": "orinoco-front-end",
+  "version": "1.0.0",
+  "description": "This is the front end  for Project 5 of the Junior Web Developer path.",
+  "main": "JS/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romainmontagnon/OC_RomainMontagnon_5_18012021.git"
+  },
+  "author": "Romain Montagnon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/romainmontagnon/OC_RomainMontagnon_5_18012021/issues"
+  },
+  "homepage": "https://github.com/romainmontagnon/OC_RomainMontagnon_5_18012021#readme"
+}
