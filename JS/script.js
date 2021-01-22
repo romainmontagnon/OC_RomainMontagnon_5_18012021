@@ -9,7 +9,7 @@ document.getElementById('submit').addEventListener('click', e =>{
             console.log(result);
             document.getElementById('result').innerHTML = ('Contenue : ')+result[0];
             console.table(result);
-            console.log(result[0]);
+            console.log(result[0l]);
         }
     };
     request.open("GET", "http://localhost:3000/api/cameras");
