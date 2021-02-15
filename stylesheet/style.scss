@@ -1,11 +1,20 @@
-.hero{
-    width: 100%;
-    height: 50%;
-    overflow: hidden;
-    display: flex;
-    justify-content: baseline;
-    img{
-        object-fit: cover;
-        width: 100%;
+.landing-question{
+    &_start{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
     }
+    &_end{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    } 
+}
+
+@media screen and (max-width: 576px){
+.landing-question{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 }
