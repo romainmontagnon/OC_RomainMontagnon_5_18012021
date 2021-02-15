@@ -3,8 +3,10 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Boilerplate Romain</title>
+        <title>Orinoco Camera</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" href="img/favicon/alexander-andrews-soLEw77Napo-unsplash_CUT_small_fav.png" type="image/png">
         
         <link rel="stylesheet" href="stylesheet/style.css">
         
@@ -15,11 +17,59 @@
         <script src="https://kit.fontawesome.com/844f2c68d0.js" crossorigin="anonymous"></script>
     </head>
 
-    <body class="container">
+    <body class="container bg-secondary">
         <main>
             <header>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <div class="container-fluid">
+                        <a class="navbar-brand text-light navbar-dark" href="#">
+                            <img src="img/logo/LOGO-alexander-andrews-soLEw77Napo-unsplash_CUT_small.png" width="30" height="30" alt="Logo Orinico">
+                            <span>Orinoco Camera</span>
+                        </a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link active text-light" aria-current="page" href="#">Blog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active text-light" aria-current="page" href="#">Shop</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active text-light" aria-current="page" href="#">Contact</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <button type="button" class="btn btn-dark position-relative">
+                                            <i class="fas fa-shopping-cart" aria-label="Panier"></i>
+                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">+99 <span class="visually-hidden">unread messages</span></span>
+                                        </button>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <form class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Recherche">
+                                <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
             </header>
             <section>
+                
+                <div class="row">
+                    <div class="col">
+                      <p>HERO SECTION</p>
+                    </div>
+                </div>
                 <input type="submit" value="Appeler la fonction" id="submit">
                 <div id="result"></div>
                 <div id="picture"></div>

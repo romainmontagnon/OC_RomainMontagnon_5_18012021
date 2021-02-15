@@ -46,17 +46,17 @@ function createLi(item){
     //let html = 'Appareil : '+item.name+'.<br>Optique : '+item.lenses[0]+' ou '+item.lenses[1]+'.<br>Prix : '+item.price+' €<br><img src="'+item.imageUrl+'"></img>';
     let html = `
                 <div class="card bg-light my-3 w-50">
-                    <img src=${item.imageUrl} class="card-img-top" alt="...">
+                    <img src=${item.imageUrl} class="card-img-top" alt="..." class="mw-100">
                     <div class="card-body">
                         <h5 class="card-title">${item.name}</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p class="card-text">${item.description}</p>
                         <ul class="list-unstyled">
                             <li><h6>Optique : </h6><span>${item.lenses[0]}  ou ${item.lenses[1]}</span></li>
-                            <li><h6>Prix : </h6><span>${item.price} €</span></li>
+                            <li><h6>Prix : </h6></li>
                         </ul>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a href="#" class="btn btn-primary"><span>${item.price} €</span></a>
                     </div>
-                </div>`
+                </div>`;
     li.innerHTML = html;
     console.log(li);
     console.log(item.imageUrl);
