@@ -65,6 +65,7 @@
                 </nav>
             </header> -->
             <header class="header">
+                <div>
                 <div class="logo">
                     <a href="index.html" class="">
                         <div>
@@ -80,17 +81,18 @@
                     <li><a href="#">Shop</a></li>
                     <li>
                         <a href="#">
-                            <i class="fas fa-shopping-cart" aria-label="Panier"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary" id="numberOfCartItems"> 0</span>
+                            <i class="fas fa-shopping-cart cart" aria-label="Panier"></i>
+                            <span class="cart-number" id="numberOfCartItems"> 0</span>
                         </a>
                     </li>
                     <li>
-                        <form class="form-flex">
+                        <form>
                             <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Recherche">
                             <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
                         </form>
                     </li>               
                 </ul>
+                </div>
             </header>
             <section>
                 <input type="submit" value="Ajouter 1 au panier" id="cart-plus-one">
