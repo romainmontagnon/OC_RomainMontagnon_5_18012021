@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 body {
   font-family: 'Roboto', sans-serif;
-  background-color: #6c757d;
+  background-color: #B0B6BA;
   color: #f8f9fa;
   margin: 0;
   padding: 0;
@@ -23,8 +23,15 @@ main, header {
   }
 }
 
+.divider {
+  height: 0;
+  margin: 0.5rem 0;
+  overflow: hidden;
+  border-top: 0.063rem solid #f8f9fa;
+}
+
 .header {
-  background-color: #212529;
+  background-color: #343A40;
   color: #f8f9fa;
   box-shadow: 0.063rem 0.063rem 0.25rem 0 rgba(0, 0, 0, 0.1);
   display: flex;
@@ -41,7 +48,7 @@ main, header {
   padding: 0;
   list-style: none;
   overflow: hidden;
-  background-color: #212529;
+  background-color: #343A40;
   font-size: 1rem;
 }
 
@@ -53,7 +60,7 @@ main, header {
 
 .header .menu a:hover,
 .header .menu .btn-cart:hover {
-  background-color: #d5dce2;
+  background-color: #2F2F2F;
 }
 
 .header .logo {
@@ -191,8 +198,71 @@ main, header {
   background-color: #d5dce2;
   border: solid orangered 0.063rem;
   padding: 0.35em 0.65em;
-  color: #212529;
+  color: #171718;
   font-weight: 700;
+}
+
+.cart span:nth-child(3) {
+  font-size: 0.5rem;
+  position: relative;
+  left: -0.625rem;
+}
+
+.toggle, [id^=drop] {
+  display: none;
+}
+
+.dropdown {
+  background-color: #343A40;
+}
+
+.dropdown:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.dropdown ul {
+  float: left;
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+}
+
+.dropdown li {
+  margin: 0px;
+  float: left;
+}
+
+.dropdown a {
+  display: block;
+  text-decoration: none;
+}
+
+.dropdown ul ul {
+  display: none;
+  position: absolute;
+  top: 60px;
+  background-color: #343A40;
+}
+
+.dropdown ul ul li {
+  width: 170px;
+  float: none;
+  display: list-item;
+  position: relative;
+}
+
+.dropdown ul li:hover > ul {
+  display: inherit;
+}
+
+@media (max-width: 768px) {
+  .dropdown ul ul {
+    display: none;
+    position: absolute;
+    left: 100px;
+  }
 }
 
 .landing-question_start {
@@ -219,7 +289,7 @@ main, header {
   display: inline-block;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  color: #343A40;
   text-align: center;
   text-decoration: none;
   vertical-align: middle;
@@ -248,7 +318,7 @@ main, header {
   margin-left: 0.625rem;
   font-size: 1rem;
   font-weight: 400;
-  color: #212529;
+  color: #343A40;
   background-color: #fff;
   background-clip: padding-box;
   border: 0.063rem solid #ced4da;

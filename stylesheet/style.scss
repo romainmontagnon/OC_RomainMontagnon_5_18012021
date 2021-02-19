@@ -1,19 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 //Colors
-$bg-dark : #212529;
-$bg-secondary: #6c757d;
+$bg-dark : #343A40;
+$bg-secondary: #B0B6BA;
 $bg-secondary-lighter: #d5dce2;
-$bg-dark-hover: #666;
-$bg-dark-menu-first: #444;
-$bg-dark-menu-second: #555;
+$bg-dark-hover: #2F2F2F;
 $bg-light :#f8f9fa;
 
-$text-dark :#212529;
+$text-dark :#171718;
 $text-light :#f8f9fa;
 
 $light : #f8f9fa;
-$dark: #212529;
+$dark: #343A40;
 
 //Breakpoint
 $tablet : 768px;
@@ -63,6 +61,13 @@ main, header{
     }
 }
 
+.divider{
+    height: 0;
+    margin : 0.5rem 0;
+    overflow: hidden;
+    border-top: $Px1ToRem solid $bg-light;
+}
+
 //Début de Navbar
 
 .header{
@@ -90,7 +95,7 @@ main, header{
         display: block;
         padding: $Px20ToRem;
         &:hover{
-            background-color: $bg-secondary-lighter;
+            background-color: $bg-dark-hover;
         }
     }
     .logo{
@@ -218,9 +223,141 @@ main, header{
         padding: 0.35em 0.65em;
         color: $text-dark;
         font-weight: 700;
+
+    }
+    span:nth-child(3){
+        font-size: 0.5rem;
+        position: relative;
+        left: -$Px10ToRem;
     }
 }
 
+//Debut dropdown menu dans navbar
+.toggle, [id^=drop]{
+     display: none;
+}
+
+.dropdown {
+    background-color: $bg-dark;
+    &:after{
+       content: "";
+        display: table;
+        clear: both;
+    }
+    ul{
+        float: left;
+        padding: 0px;
+        margin: 0px;
+        list-style: none;
+    }
+    li{
+        margin: 0px;
+        float: left;
+        //background-color: $bg-dark;
+    }
+    a{
+        display: block;
+        // padding: 0 20px;
+        // color: $bg-light;
+        // font-size: 20px;
+        // line-height: 60px;
+        text-decoration: none;
+    }
+    ul ul{
+        display: none;
+        position: absolute;
+        top: 60px;
+        background-color: $bg-dark;
+    }
+    
+    ul ul li{
+        width: 170px;
+        float: none;
+        display: list-item;
+        position: relative;
+    }
+    // ul ul ul li{
+    //     position: relative;
+    //     top : -60px;
+    //     left: 170px;
+    // }
+    ul li:hover>ul{
+        display: inherit;
+    }
+}
+@media (max-width: $tablet){
+.dropdown{
+    ul ul{
+            display: none;
+            position: absolute;
+            left: 100px;
+        }
+    }
+}
+// @media all and (max-width: $tablet){
+//     .dropdown{
+//         margin: 0px;
+//         ul {
+//             float: none;
+//         }
+//     }
+//     .toggle+a, .dropdown-menu{
+//         display: none;
+//     }
+//     .toggle{
+//         display: block;
+//         background-color: $bg-dark;
+//         padding: 0px 20px;
+//         font-size: 20px;
+//         line-height: 60px;
+//         text-decoration: none;
+//         border:none;
+//         &:hover{
+//             background-color: $bg-dark-hover;
+//         }
+//     }
+//     [id^=drop]:checked+ul{
+//      display: block;
+//     }
+//     .dropdown{
+//         ul li{
+//             display: block;
+//             width: 100%;
+//         }
+//         ul ul .toggle,
+//         ul ul a{
+//             padding: 0 40px;
+//         }
+//         ul ul ul{
+//             a{
+//                 padding: 0 80px;
+//                 background-color:$bg-dark-menu-first;
+//             }
+//             li{
+//                 position: static;
+//             }
+//         }
+//         ul li ul li .toggle,
+//         ul ul a{
+//             background-color: $bg-dark-menu-second;
+//         }
+//         ul ul{
+//             float: none;
+//             position: static;
+//             columns: $bg-light;
+//         }
+//         ul ul li:hover>ul,
+//         ul li:hover>ul{
+//             display: none;
+//         }
+//         ul ul li{
+//             display: block;
+//             width: 100%;
+//         }
+//     }
+// }
+
+//fin dropdown menu dans navbar
 //fin de Navbar
 
 .landing-question{

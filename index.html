@@ -80,10 +80,32 @@
                     <li><a href="#">Blog</a></li>
                     <li><a href="#">Shop</a></li>
                     <li>
-                        <a href="#">
+                        <div class="dropdown">
+                            <label for="drop" class="toggle"></label>
+                            <input type="checkbox" id="drop">
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <label for="drop-2" class="toggle">Three Tier</label>
+                                    <a href="#" class="cart">
+                                        <i class="fas fa-shopping-cart" aria-label="Panier"></i>
+                                        <span class="cart-number" id="numberOfCartItems"> 0</span><span>&#9660;</span>
+                                    </a>
+                                    <input type="checkbox" id="drop-2">
+                                    <ul>
+                                        <li><a href="#">Dropdown 1</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Dropdown 2</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Dropdown 3</a></li>
+                                        <li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- <a href="#">
                             <i class="fas fa-shopping-cart cart" aria-label="Panier"></i>
                             <span class="cart-number" id="numberOfCartItems"> 0</span>
-                        </a>
+                        </a> -->
                     </li>
                     <li>
                         <form>
