@@ -1,14 +1,11 @@
-console.log("script.js loaded");
-
-
 function showResult (items){
     for (let i = 0; i < items.length; i++){
         function showResult (items){
             for (let i = 0; i < items.length; i++){
-                console.log(items[i].name);
-                console.table(items[i]);
+                // console.log(items[i].name);
+                // console.table(items[i]);
                 let li = createLi(items[i]);
-                console.log(lis);
+                // console.log(li);
                 //document.getElementById('myList').appendChild(li);
                 //affichage(items[i]);
             };
@@ -18,6 +15,22 @@ function showResult (items){
     };
 };
 
+function getID(){
+    let listeDeClass = document.getElementsByClassName('product-detail-link');
+    console.log(listeDeClass);
+    for (let i = 0; i < listeDeClass.length; i++) {
+        let element = listeDeClass[i];
+        element.addEventListener('click', e=>{
+            console.log(e);
+        });
+        // console.log(element);
+        // console.log(element.id);
+        // listeDeClass.addEventListener('click', e=> {
+        //     console.log(e);
+        // });
+        
+    };
+};
 
 function createLi(item){
     let li = document.createElement('li');
@@ -31,7 +44,7 @@ function createLi(item){
                             <li><h6>Optique : </h6><span class="ps-4">${item.lenses[0]}</span> </br> <span class="ps-4">${item.lenses[1]}</span></li>
                             <li><h6>Prix : </h6></li>
                         </ul>
-                        <a href="shop_product.html" class="btn btn-primary ms-4"><span>${item.price} €</span></a>
+                        <a href="shop_product.html" class="btn btn-primary ms-4 product-detail-link" id="${item._id}"><span>${item.price} €</span></a>
                     </div>
                 </div>`;
     li.innerHTML = html;
@@ -54,11 +67,11 @@ function fetchRequest (){
             return  response.json();
         })
         .then(function (result){
-            console.log(result);
+            console.table(result);
             showResult(result);
+            getID();
         });
 };
-
 // document.getElementById('submit').addEventListener('click', e =>{
 //     // ajaxRequest();
 //     // console.log('Appel de la fonction ajaxRequest');
@@ -66,9 +79,10 @@ function fetchRequest (){
 //     console.log('Appel de la fonction fetchRequest');
 // });
 
-window.addEventListener('DOMContentLoaded', e =>{
-    // ajaxRequest();
-    // console.log('Appel de la fonction ajaxRequest');
-    fetchRequest();
-    console.log('Appel de la fonction fetchRequest via DOMContentLoaded');
-});
+
+
+// window.addEventListener('DOMContentLoaded', e =>{
+//     // ajaxRequest();
+//     // console.log('Appel de la fonction ajaxRequest');
+//     fetchRequest();
+// });

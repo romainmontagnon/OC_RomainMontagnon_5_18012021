@@ -17,7 +17,7 @@
         <script src="https://kit.fontawesome.com/844f2c68d0.js" crossorigin="anonymous"></script>
     </head>
 
-    <body class="container-lg bg-secondary">
+    <body class="container-lg bg-secondary" onload="localStorageResume()">
         <main>
             <header>
                 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -71,11 +71,11 @@
                 <input type="submit" value="Enlever 1 au panier" id="cart-minus-one">
                 <input type="submit" value="Vider le panier" id="clear-cart">
                 <div>
-                    <h2 class="text-dark my-3">Orinico Camera - Our Shop</h2>
+                    <h2 class="text-dark my-3">Orinico Camera - Détail du produit</h2>
                     <div id="carouselLanding" class="carousel slide position-relative" data-bs-ride="carousel">
                         <div class="carousel-inner">
-                          <div class="carousel-item active">
-                            <img src="../img/img/shop_hero_small_benjamin-raffetseder-HDIUUSO5C8g-unsplash_HERO_PRODUCTC.png" class="d-block w-100" alt="appareil fujifilm">
+                          <div class="carousel-item active" id="product-img">
+                            <!-- <img src="../img/img/shop_hero_small_benjamin-raffetseder-HDIUUSO5C8g-unsplash_HERO_PRODUCTC.png" class="d-block w-100" alt="appareil fujifilm"> -->
                           </div>
                         </div>
                     </div>
@@ -116,9 +116,9 @@
             </footer>
         </main>
         <script src="../js/script.js"></script>
-        <script src="../js/navbar.js" async></script>
-        <script src="../js/cart.js" async></script>
-        <script src="../js/index.js" async></script>
+        <script src="../js/navbar.js"></script>
+        <script src="../js/cart.js"></script>
+        <script src="../js/index.js"></script>
         <!-- Integration frameworks JS pour Boostrap 5.0.0 -->
         <!-- /!\ Frameworks JS Boostrap 5.0.0 desactiver car projet en vanilla JS -->
             <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script> -->
