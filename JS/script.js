@@ -1,23 +1,5 @@
-function ajaxRequest (){
-    console.log('Lancement de la requete AJAX');
-    let request = new XMLHttpRequest();
-    request.onreadystatechange = function(){
-        if(this.readyState == XMLHttpRequest.DONE && this.status==200){
-            let result = [];
-            console.log('Création d\'un array vide'+result);
-            result = JSON.parse(this.responseText);
-            console.log(result);
-            document.getElementById('result').innerHTML = 'Appareil : '+result[0].name+'.<br>Optique : '+result[0].lenses[0]+' ou '+result[0].lenses[1]+'.<br>Prix : '+result[0].price+' €';
-            document.getElementById('picture').innerHTML = `<img scr=${result[0].imageUrl}></img>`;
-            console.table(result);
-            console.log(result[0]);
-        }
-    };
-    request.open("GET", "http://localhost:3000/api/cameras");
-    request.send();
-    console.log('Contenue de la request :');
-    console.log(request);
-};
+console.log("script.js loaded");
+
 
 function showResult (items){
     for (let i = 0; i < items.length; i++){
@@ -27,7 +9,7 @@ function showResult (items){
                 console.table(items[i]);
                 let li = createLi(items[i]);
                 console.log(lis);
-                document.getElementById('myList').appendChild(li);
+                //document.getElementById('myList').appendChild(li);
                 //affichage(items[i]);
             };
         };
@@ -36,31 +18,32 @@ function showResult (items){
     };
 };
 
-function affichage(item){
-    document.getElementById('result').innerHTML = 'Appareil : '+item.name+'.<br>Optique : '+item.lenses[0]+' ou '+item.lenses[1]+'.<br>Prix : '+item.price+' €';
-    document.getElementById('picture').innerHTML = `<img src=${item.imageUrl}></img>`;
-};
 
 function createLi(item){
     let li = document.createElement('li');
-    //let html = 'Appareil : '+item.name+'.<br>Optique : '+item.lenses[0]+' ou '+item.lenses[1]+'.<br>Prix : '+item.price+' €<br><img src="'+item.imageUrl+'"></img>';
     let html = `
-                <div class="card bg-light my-3 w-50">
-                    <img src=${item.imageUrl} class="card-img-top" alt="..." class="mw-100">
+                <div class="card bg-light my-3 mx-auto w-75">
                     <div class="card-body">
+                        <img src=${item.imageUrl} class="card-img-top" alt="photo du produit ${item.name}" class="mw-100">
                         <h5 class="card-title">${item.name}</h5>
-                        <p class="card-text">${item.description}</p>
+                        <p class="card-text px-4">${item.description}</p>
                         <ul class="list-unstyled">
-                            <li><h6>Optique : </h6><span>${item.lenses[0]}  ou ${item.lenses[1]}</span></li>
+                            <li><h6>Optique : </h6><span class="ps-4">${item.lenses[0]}</span> </br> <span class="ps-4">${item.lenses[1]}</span></li>
                             <li><h6>Prix : </h6></li>
                         </ul>
-                        <a href="#" class="btn btn-primary"><span>${item.price} €</span></a>
+                        <a href="shop_product.html" class="btn btn-primary ms-4"><span>${item.price} €</span></a>
                     </div>
                 </div>`;
     li.innerHTML = html;
     console.log(li);
     console.log(item.imageUrl);
     document.getElementById('myList').appendChild(li);
+    let addClass = document.querySelectorAll("#myList > li");
+    console.log(addClass);
+    for (let i = 0; i < addClass.length; i++) {
+        //let element = addClass[i];
+        addClass[i].classList.add('list-inline-item', 'test');
+    };
     return li;
 };
 
@@ -76,9 +59,16 @@ function fetchRequest (){
         });
 };
 
-document.getElementById('submit').addEventListener('click', e =>{
+// document.getElementById('submit').addEventListener('click', e =>{
+//     // ajaxRequest();
+//     // console.log('Appel de la fonction ajaxRequest');
+//     fetchRequest();
+//     console.log('Appel de la fonction fetchRequest');
+// });
+
+window.addEventListener('DOMContentLoaded', e =>{
     // ajaxRequest();
     // console.log('Appel de la fonction ajaxRequest');
     fetchRequest();
-    console.log('Appel de la fonction fetchRequest');
+    console.log('Appel de la fonction fetchRequest via DOMContentLoaded');
 });

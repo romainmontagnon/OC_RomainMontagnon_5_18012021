@@ -1,3 +1,6 @@
+console.log("navbar.js loaded");
+
+
 function showDropdownMenu (){
     document.getElementById('myDropdown').classList.toggle('show');
     console.log('show menu');

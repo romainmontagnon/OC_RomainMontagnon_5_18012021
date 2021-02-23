@@ -6,6 +6,10 @@
   padding: 0 0;
 }
 
+#menu-drop {
+  visibility: hidden;
+}
+
 .show-menu {
   display: block;
 }

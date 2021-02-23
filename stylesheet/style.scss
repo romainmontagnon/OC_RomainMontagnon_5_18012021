@@ -1,2 +1,141 @@
 @import url("navbar.css");
 //@import url("dropdown-cart.css")
+
+//Declaration des variables
+//Breakpoint
+$tablet : 768px;
+$mobile : 576px;
+
+//Color
+$bg-secodary : #6d747c;
+//Fin Declaration des variables
+
+//Dropdown Menu
+.dropdown-content{
+    display: none;
+    position: absolute;
+    min-width: 160px;
+    z-index: 1;
+    padding: 0 0;
+}
+
+#menu-drop{
+    visibility: hidden;
+}
+//Fin Dropdown Menu
+
+//Class for JS function
+.show-menu{
+    display: block;
+}
+//Class for JS Function END
+
+//CSS rule and Boostrap modifier
+
+//CSS rule and Boostrap modifier END
+
+
+//Debut Navbar
+.navbar-icon{
+    display: none;
+}
+//Fin Navbar
+
+//Debut Media Query Navbar
+@media all  and (max-width : $tablet){
+    .hide-menu{
+        display: none;
+        max-height : 0px;
+    }
+    // .show-menu{
+    //     display: block;
+    // }
+    .toggler .menu-icon .navbar-icon{
+        background-color: $bg-secodary;
+        display: block;
+        height: 0.125rem;
+        width: 1.300rem;
+        position: relative;
+        cursor: pointer;
+        transition: background 0.2s ease-out;
+        // height: 30px;
+        // width: 30px;
+        // background-color: red;
+        // content: "test";
+
+        &:before {
+            background-color:$bg-secodary;
+            content: "";
+            display: block;
+            height: 100%;
+            width: 100%;
+            position: relative;
+            z-index: 3;
+            transition: all 0.2s ease-out;
+            top: 0.313rem;
+        }
+        &:after {
+            background-color:$bg-secodary;
+            content: "";
+            display: block;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            z-index: 3;
+            transition: all 0.2s ease-out;
+            top: -0.313rem;
+        }
+    }
+}
+
+.toggler{
+    cursor: pointer;
+    display: block;
+}
+
+.menu-btn{
+    display: none;
+    position: relative;
+    top: 0.313rem;
+    left:0.313rem;
+    right: 5px;
+    &:checked ~ label {
+         .navbar-icon{
+            background: transparent;
+            &:before{
+                transform: rotate(-45deg);
+                top:0px
+            }
+            &:after{
+                transform: rotate(45deg);
+                top: 0px;
+            }
+        }
+    }
+}
+
+//Fin Media Query Navbar
+
+
+.card-placecement{
+    &_start{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    &_end{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+    }
+}
+
+
+@media screen and (max-width: $mobile) {
+    .card-placecement {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+/*# sourceMappingURL=style.css.map */

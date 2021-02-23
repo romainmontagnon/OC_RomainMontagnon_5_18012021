@@ -15,14 +15,21 @@ $bg-secodary : #6d747c;
     padding: 0 0;
 }
 
-// .show{
-//     display:block;
-// }
+#menu-drop{
+    visibility: hidden;
+}
+//Fin Dropdown Menu
 
+//Class for JS function
 .show-menu{
     display: block;
 }
-//Fin Dropdown Menu
+//Class for JS Function END
+
+//CSS rule and Boostrap modifier
+
+//CSS rule and Boostrap modifier END
+
 
 //Debut Navbar
 .navbar-icon{
