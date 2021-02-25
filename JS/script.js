@@ -1,6 +1,6 @@
-function showResult (items){
+const showResult = (items) => {
     for (let i = 0; i < items.length; i++){
-        function showResult (items){
+        const showResult = (items) =>{
             for (let i = 0; i < items.length; i++){
                 // console.log(items[i].name);
                 // console.table(items[i]);
@@ -14,9 +14,14 @@ function showResult (items){
     };
 };
 
-function showProduct (items){
+const showProduct = (items) => {
+    let paramString=window.location.href;
+    console.log(paramString);
+    let searchParams = new URL(paramString).searchParams;
+    console.log(searchParams.get('id'));
+
     console.log('showProduct()');
-    let itemID = localStorage.getItem('itemID');
+    let itemID = searchParams.get('id');
     //console.log(itemID);
     for (let i = 0; i < items.length; i++){
         let itemsID = (items[i]._id);
@@ -30,7 +35,7 @@ function showProduct (items){
     };
 };
 
-function productPageDetails(e){
+const productPageDetails = (e) =>{
     console.log(e);
     let div = document.createElement('div');
     let html =  `
@@ -45,67 +50,27 @@ function productPageDetails(e){
                     <div class="col-8">
                         <h2 class="text-dark fw-normal my-3">${e.name}</h2>
                         <h3 class="text-dark fw-normal my-3">Description</h3>
-                        <p class="ps-4">${e.description}</p>
-                        <h3 class="text-dark fw-normal my-3">Options</h3>
-                        <p class="ps-4">${e.lenses[0]}</p>
-                        <p class="ps-4">${e.lenses[1]}</p>
+                        <p class="ps-4">${e.description}</p>`;
+                        
+                    html+=`                        
                     </div>
                     <div class="col-4">
-                        <h2 class="text-dark fw-normal my-3">En cours</h2>
-                        <h3 class="text-dark fw-normal my-3">Choix</h3>
-                        <div class="row">
-                            <div class="col form-check form-switch">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                                ${e.lenses[0]}
-                            </label>
-                            </div>
-                            <div class="col form-check form-switch">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                ${e.lenses[1]}
-                            </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <button type="button" class="col-2 h-50 my-auto btn btn-primary">+</button>
-                                <div class="h-50 col-5 form-floating">
-                                    <select class="form-select" id="floatingSelect" aria-label="Choisir la quantité">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">3</option>
-                                        <option value="user">user define</option>
-                                    </select>                                </div>
-                            <button type="button" class="col-2 h-50 my-auto btn btn-primary">-</button>
-                        </div>
-                        <p class="ps-4">${e.description}</p>
                         <h3 class="text-dark fw-normal my-3">Options</h3>
-                        <p class="ps-4">${e.lenses[0]}</p>
-                        <p class="ps-4">${e.lenses[1]}</p>
-                    </div>
-                </div>
-    `
+                        <div>`;
+                        for (let i = 0; i < e.lenses.length; i++) {                        
+                        html+=`
+                            <div class="form-check form-switch">
+                            <input class="form-check-input item-option" type="radio" data-item=${e._id} data-lense-id="${e.lenses[i]}" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                ${e.lenses[i]}
+                            </label>
+                        </div>`;
+                        };
     div.innerHTML = html
     document.getElementById('myProductDetail').appendChild(div);
 };
 
-function getID(){
-    let listeDeClass = document.getElementsByClassName('product-detail-link');
-    console.log(listeDeClass);
-    for (let i = 0; i < listeDeClass.length; i++) {
-        let element = listeDeClass[i];
-        element.addEventListener('click', e=>{
-            console.log(e.path[0].id);
-            console.log(e.path);
-            localStorage.setItem('itemID', e.path[0].id);
-            let itemID = localStorage.getItem('itemID');
-            console.log(itemID);
-        });
-    };
-};
-
-function createLi(item){
+const createLi = (item) =>{
     let li = document.createElement('li');
     let html = `
                 <div class="card bg-light my-3 mx-auto w-75">
@@ -114,10 +79,17 @@ function createLi(item){
                         <h5 class="card-title">${item.name}</h5>
                         <p class="card-text px-4">${item.description}</p>
                         <ul class="list-unstyled">
-                            <li><h6>Optique : </h6><span class="ps-4">${item.lenses[0]}</span> </br> <span class="ps-4">${item.lenses[1]}</span></li>
+                            <li><h6>Optique : </h6>`;
+                            
+                        for (let i = 0; i < item.lenses.length; i++) {
+                            html += `<p="ps-4">${item.lenses[i]}</p>`;                             
+                        };
+                            
+                            html +=`
+                            </li>
                             <li><h6>Prix : </h6></li>
                         </ul>
-                        <a href="shop_product.html" class="btn btn-primary ms-4 product-detail-link"><span id="${item._id}">${item.price} €</span></a>
+                        <a href="shop_product.html?id=${item._id}" class="btn btn-primary ms-4 product-detail-link"><span>${item.price} €</span></a>
                     </div>
                 </div>`;
     li.innerHTML = html;
@@ -127,7 +99,7 @@ function createLi(item){
     return li;
 };
 
-function fetchRequest (){
+const fetchRequest = () =>{
     console.log('Lancement de la requete FETCH');
     fetch("http://localhost:3000/api/cameras")
         .then(function (response){
@@ -136,11 +108,10 @@ function fetchRequest (){
         .then(function (result){
             console.table(result);
             showResult(result);
-            getID();
         });
 };
 
-function productFetchRequest (){
+const productFetchRequest = () =>{
     console.log('Lancement de la requete FETCH');
     fetch("http://localhost:3000/api/cameras")
         .then(function (response){

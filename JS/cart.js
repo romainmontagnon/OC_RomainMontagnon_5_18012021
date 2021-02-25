@@ -1,4 +1,4 @@
-function localStorageResume(){
+const localStorageResume = () => {
     let cartItems = localStorage.getItem('cartItems');
     console.log(cartItems);
     if (cartItems===null){
@@ -9,7 +9,7 @@ function localStorageResume(){
 };
 
 
-function addOneToCart(){
+const addOneToCart = () => {
     // console.log("appel fonction +");
     // console.log(numberOfItems);
     let cartItems = localStorage.getItem('cartItems');
@@ -21,7 +21,7 @@ function addOneToCart(){
     showNumberOfCartItems(cartItems);
 };
 
-function minusOneToCart(){
+const minusOneToCart = () => {
     // console.log("appel fonction +");
     // console.log(numberOfItems);
     let cartItems = localStorage.getItem('cartItems');
@@ -33,7 +33,7 @@ function minusOneToCart(){
     showNumberOfCartItems(cartItems);
 };
 
-function clearCart (){
+const clearCart = () => {
     // console.log("appel fonction clear");
     let cartItems = localStorage.getItem('cartItems');
     cartItems = 0;
@@ -41,8 +41,28 @@ function clearCart (){
     showNumberOfCartItems(cartItems);
 }
 
-function showNumberOfCartItems(cartItems){
+const showNumberOfCartItems = (cartItems) => {
     document.getElementById('numberOfCartItems').innerText=cartItems;
+};
+
+const options = () => {
+    let itemOption = document.getElementsByClassName('item-option');
+    console.log(itemOption);
+    for (let i = 0; i < itemOption.length; i++){
+        if (itemOption[i].checked==true) {
+            console.warn(itemOption[i].dataset);
+            addItemToCart(itemOption[i].dataset);
+        };  
+    };
+};
+
+const quantity = () => {
+    let inputQuantity = document.getElementById('inputQuantity');
+    console.log(inputQuantity.value);
+};
+
+const addItemToCart = (value) =>{
+    console.log(value);
 };
 
 document.getElementById('cart-plus-one').addEventListener('click', e=>{
@@ -57,4 +77,9 @@ document.getElementById('cart-minus-one').addEventListener('click', e=>{
 document.getElementById('clear-cart').addEventListener('click', e=>{
     // console.log("CLEAR CART");
     clearCart();
+});
+
+document.getElementById('addToCart').addEventListener('click', e=> {
+    options ();
+    quantity();
 });

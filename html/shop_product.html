@@ -36,10 +36,10 @@
                                     <a class="nav-link active text-light" aria-current="page" href="#">Blog</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active text-light" aria-current="page" href="#">Shop</a>
+                                    <a class="nav-link active text-light" aria-current="page" href="shop.html">Shop</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link active text-light" aria-current="page" href="#">Contact</a>
+                                    <a class="nav-link active text-light" aria-current="page" href="contact.html">Contact</a>
                                 </li>
                             </ul>
                             <div class="nav-item cart-dropdown-menu me-3 pt-1">
@@ -73,19 +73,19 @@
                 <div>
                     <h2 class="text-dark my-3">Orinico Camera - Détail du produit</h2>
                     <div id="myProductDetail">
-                        <!-- <div id="carouselLanding" class="carousel slide position-relative" data-bs-ride="carousel">
-                            <div class="carousel-inner">
-                            <div class="carousel-item active" id="product-img">
-                                <img src="../img/img/shop_hero_small_benjamin-raffetseder-HDIUUSO5C8g-unsplash_HERO_PRODUCTC.png" class="d-block w-100" alt="appareil fujifilm">
-                            </div>
-                            </div>
-                        </div> -->
                     </div>
-                </div>   
-                <div>
-                    <!-- <input type="submit" value="Appeler la fonction" id="submit"> -->
-                        <ul id="myList" class="list-unstyled">
-                        </ul>
+                    
+
+                <div class="row">
+                    <div class="col-8">
+                        <div class="input-group mb-3 number-input">
+                            <label class="input-group-text" for="inputQuantity">Quantité</label>
+                            <input type="number" value=1 min=1 max=10 class="form-control" id="inputQuantity" placeholder="Combien en voulez vous ?">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <button type="button" id="addToCart" class="col btn btn-primary">Ajouter au pannier</button>
+                    </div>
                 </div>
             </section>
             <footer class="bg-dark row">
@@ -103,7 +103,7 @@
                 </ul>
                 <ul class="col my-auto py-2">
                     <li>
-                        <a class="nav-link active text-light text-center" href="#">Contact</a>
+                        <a class="nav-link active text-light text-center" href="contact.html">Contact</a>
                     </li>
                     <li>
                         <a class="nav-link active text-light text-center" href="#">CGV</a>
