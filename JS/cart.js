@@ -1,9 +1,10 @@
-let numberOfItems = 0;
-
 function localStorageResume(){
     let cartItems = localStorage.getItem('cartItems');
-    numberOfItems = cartItems;
-    showNumberOfCartItems();
+    console.log(cartItems);
+    if (cartItems===null){
+        cartItems=0;
+    }
+    showNumberOfCartItems(cartItems);
     console.log(cartItems);
 };
 
@@ -11,32 +12,37 @@ function localStorageResume(){
 function addOneToCart(){
     // console.log("appel fonction +");
     // console.log(numberOfItems);
-    numberOfItems++;
-    if (numberOfItems <= 0){
-        numberOfItems=0;
+    let cartItems = localStorage.getItem('cartItems');
+    cartItems++;
+    if (cartItems <= 0){
+        cartItems=0;
     }
-    showNumberOfCartItems();
+    localStorage.setItem('cartItems', cartItems);
+    showNumberOfCartItems(cartItems);
 };
 
 function minusOneToCart(){
     // console.log("appel fonction +");
     // console.log(numberOfItems);
-    numberOfItems--;
-    if (numberOfItems <= 0){
-        numberOfItems=0;
+    let cartItems = localStorage.getItem('cartItems');
+    cartItems--;
+    if (cartItems <= 0){
+        cartItems=0;
     }
-    showNumberOfCartItems();
+    localStorage.setItem('cartItems', cartItems);
+    showNumberOfCartItems(cartItems);
 };
 
 function clearCart (){
     // console.log("appel fonction clear");
-    numberOfItems = 0;
-    showNumberOfCartItems();
+    let cartItems = localStorage.getItem('cartItems');
+    cartItems = 0;
+    localStorage.setItem('cartItems', cartItems);
+    showNumberOfCartItems(cartItems);
 }
 
-function showNumberOfCartItems(){
-    document.getElementById('numberOfCartItems').innerText=numberOfItems;
-    // console.log(numberOfItems);
+function showNumberOfCartItems(cartItems){
+    document.getElementById('numberOfCartItems').innerText=cartItems;
 };
 
 document.getElementById('cart-plus-one').addEventListener('click', e=>{

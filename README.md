@@ -1,6 +1,8 @@
 # OC_RomainMontagnon_5_18012021
 Project 5 introducing JS and API's - Openclassrooms courses
 
+[TOC]
+
 ## Etapes d'initialisation
 * création du repo sur GIT
 * clone du repo [GIT d'OC](https://github.com/OpenClassrooms-Student-Center/JWDP5) dans la dossier racine du projet en local (nom de dossier : JWDP5)
