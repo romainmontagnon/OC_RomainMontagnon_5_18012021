@@ -51,11 +51,55 @@
                                     </div>
                                 </label>
                                 <ul class="dropdown-content bg-dark hide-menu" id="myDropdown">
-                                    <li class="nav-item list-group-item bg-dark"><a class="nav-link active text-light" href="#">Dropdown 1</a></li>
+                                    <li class="nav-item list-group-item bg-dark text-light">Mon Panier</li>
                                     <li class="dropdown-divider bg-light"></li>
-                                    <li class="nav-item list-group-item bg-dark"><a class="nav-link active text-light" href="#">Dropdown 2</a></li>
+                                    <li class="nav-item list-group-item bg-dark">
+                                        <table class="table table-secondary">
+                                            <thead>
+                                                <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Produits</th>
+                                                <th scope="col">Option</th>
+                                                <th scope="col">Quantité</th>
+                                                <th scope="col">Prix</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="showCartItems">
+                                                <!-- <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>Cam1</td>
+                                                    <td>50mm 1.8</td>
+                                                    <td>
+                                                        <input type="number" value= min=1 max=10 class="form-control" id="inputQuantity">
+                                                    </td>
+                                                    <td>€€€</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>Cam2</td>
+                                                    <td>24mm 4.0</td>
+                                                    <td>
+                                                        <input type="number" value= min=1 max=10 class="form-control" id="inputQuantity">
+                                                    </td>
+                                                    <td>€€€</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">3</th>
+                                                    <td>Cam3</td>
+                                                    <td>125mm 1.4</td>
+                                                    <td>
+                                                        <input type="number" value= min=1 max=10 class="form-control" id="inputQuantity">
+                                                    </td>
+                                                    <td>€€€</td>
+                                                </tr> -->
+                                            </tbody>
+                                        </table>
+                                    </li>
                                     <li class="dropdown-divider bg-light"></li>
-                                    <li class="nav-item list-group-item bg-dark"><a class="nav-link active text-light" href="#">Dropdown 3</a></li>
+                                    <li class="nav-item list-group-item bg-dark"><input type="submit" value="Enlever 1 au panier" id="cart-minus-one"><input type="submit" value="Ajouter 1 au panier" id="cart-plus-one"></li>
+
+                                    <li class="dropdown-divider bg-light"></li>
+                                    <li class="nav-item list-group-item bg-dark"><a class="nav-link active text-light" href="#"><input type="submit" value="Detail du panier" id=""><input type="submit" value="Vider le panier" id="clear-cart"></a></li>
                                 </ul>
                             </div>
                                 <form class="d-flex">
@@ -67,9 +111,6 @@
                 </nav>
             </header>
             <section>
-                <input type="submit" value="Ajouter 1 au panier" id="cart-plus-one">
-                <input type="submit" value="Enlever 1 au panier" id="cart-minus-one">
-                <input type="submit" value="Vider le panier" id="clear-cart">
                 <div>
                     <h2 class="text-dark my-3">Orinico Camera - Contact</h2>
                     <div id="carouselLanding" class="carousel slide position-relative" data-bs-ride="carousel">

@@ -60,7 +60,7 @@ const productPageDetails = (e) =>{
                         for (let i = 0; i < e.lenses.length; i++) {                        
                         html+=`
                             <div class="form-check form-switch">
-                            <input class="form-check-input item-option" type="radio" data-item=${e._id} data-lense-id="${e.lenses[i]}" name="flexRadioDefault" id="flexRadioDefault1">
+                            <input class="form-check-input item-option" checked type="radio" data-item-id=${e._id} data-lense-id="${e.lenses[i]}" name="flexRadioDefault" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 ${e.lenses[i]}
                             </label>
