@@ -1,9 +1,20 @@
 let cartItemsArray = new Array()
 let base=10;
 
+let cameraCartObject = {
+    name : '',
+    _id : '',
+    itemOption : '',
+    price : '',
+    imageUrl : '',
+    quantity : ''
+};
+
+
+
+
 const localStorageResume = () => {
     //Cart Resume
-
     //Number of cart items
     let cartItems = localStorage.getItem('cartItems');
     console.log(cartItems);
@@ -15,6 +26,12 @@ const localStorageResume = () => {
     let cartItemsParsed = parseInt(cartItems, base);
     showNumberOfCartItems(cartItemsParsed);
     console.log(cartItemsParsed);
+
+    //Cart Items Resume
+    let arrayCartItemsCallback = localStorage.getItem('arrayCartItems');
+    // arrayCartItemsCallback = JSON.parse(arrayCartItemsCallback, cameraCartObject);
+    console.table(arrayCartItemsCallback);
+    showCartItems(arrayCartItemsCallback);
 };
 
 
@@ -61,13 +78,20 @@ const numberOfCartItems = () => {
 
 const clearCart = () => {
     // console.log("appel fonction clear");
-    let cartItems = localStorage.getItem('cartItems');
-    let cartItemsParsed = parseInt(cartItems, base);
+    let numberOfCartItems = localStorage.getItem('cartItems');
+    let cartItemsParsed = parseInt(numberOfCartItems, base);
+
+    let itemsInCart = localStorage.getItem('arrayCartItems');
+    itemsInCart = {};
+
     cartItemsParsed = 0;
-    cartItemsArray = new Array
+    cartItemsArray = new Array();
+    localStorage.setItem('arrayCartItems', itemsInCart);
     localStorage.setItem('cartItems', cartItemsParsed);
     showNumberOfCartItems(cartItemsParsed);
-}
+    document.getElementById('showCartItems').innerHTML=" ";
+    return;
+};
 
 
 const showNumberOfCartItems = (numberOfItems) => {
@@ -76,8 +100,10 @@ const showNumberOfCartItems = (numberOfItems) => {
 };
 
 const readQuantityOption = (value) =>{
-    let itemOption = document.getElementsByClassName('item-option');
-    let inputQuantity = document.getElementById('inputQuantity');
+    //let itemOption = document.getElementsByClassName('item-option');
+    let itemOption = readItemOption();
+    // let inputQuantity = document.getElementById('inputQuantity');
+    let inputQuantity = readQuantity();
     console.log(inputQuantity.value);
     for (let i = 0; i < itemOption.length; i++){
         if (itemOption[i].checked==true) {
@@ -88,11 +114,23 @@ const readQuantityOption = (value) =>{
                 })
                 .then(function (result){
                     console.table(result);
+                    //let inputQuantity = readQuantity();
                     createItemForCart(itemOption[i].dataset.itemId, itemOption[i].dataset.lenseId, inputQuantity.value, result);
                 });            
         };  
     };
     
+};
+
+const readItemOption = () =>{
+    let itemOption = document.getElementsByClassName('item-option');
+    return itemOption;
+};
+
+const readQuantity = () =>{
+        let inputQuantity = 0;
+        inputQuantity = document.getElementById('inputQuantity');
+        return inputQuantity;
 };
 
 const createItemForCart = (itemId, itemOption, quantity, data) => {
@@ -101,27 +139,34 @@ const createItemForCart = (itemId, itemOption, quantity, data) => {
         if(data[i]._id===itemId){
             console.log("matching ID");
             console.log(data[i]);
-            let item = new Array()
-                item['name']=data[i].name;
-                item['_id']=data[i]._id;
-                item['itemOption']=itemOption;
-                item['price']=data[i].price;
-                item['imageUrl']=data[i].imageUrl;
-                item['quantity']=quantity;
-            //console.table(item);
-            arrayCartItems (cartItemsArray, item);
+            let item = {
+                    name : data[i].name,
+                    _id : data[i]._id,
+                    itemOption : itemOption,
+                    price : data[i].price,
+                    imageUrl : data[i].imageUrl,
+                    quantity : quantity
+                };
+            console.table(item);
+            console.log(typeof(item));
+            arrayCartItems (item);
         };
         
     };
 };
 
-const arrayCartItems = (cartItemsArray, item) =>{
+
+const arrayCartItems = (item) =>{
     cartItemsArray.push(item);
     numberOfCartItems(cartItemsArray);
     showCartItems(cartItemsArray);
     console.table(cartItemsArray);
-    console.table(item);
-    //Ce code permet de stocker un ARRAY dans un local storage
+    console.log(typeof(item));
+    // console.table(item);
+    let jsToString = JSON.stringify(cartItemsArray, cameraCartObject);
+    console.log(jsToString);
+    localStorage.setItem('arrayCartItems', jsToString);
+    // Ce code permet de stocker un ARRAY dans un local storage
     // localStorage.setItem('arrayCartItems', JSON.stringify(cartItemsArray));
     // let arrayCartItemsCallback = localStorage.getItem('arrayCartItems');
     // arrayCartItemsCallback = JSON.parse(arrayCartItemsCallback);
@@ -134,13 +179,12 @@ const showCartItems = (cartItemsArray) =>{
     let html = ``;
     for (let i = 0; i < cartItemsArray.length; i++) {
          html = `
-                <th scope="row">1</th>
                 <td>${cartItemsArray[i].name}</td>
                 <td>${cartItemsArray[i].itemOption}</td>
                 <td>
-                    <input type="number" value=${cartItemsArray[i].quantity} min=1 max=10 class="form-control" id="inputQuantity">
+                    <input type="number" value=${cartItemsArray[i].quantity} min=1 max=10 class="form-control" id="inputCartQuantity">
                 </td>
-                <td>${cartItemsArray[i].price} €</td>`;
+                <td>${cartItemsArray[i].price}€</td>`;
     };
     tr.innerHTML=html;
     document.getElementById('showCartItems').appendChild(tr);
