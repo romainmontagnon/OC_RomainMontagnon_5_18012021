@@ -15,6 +15,17 @@
   display: block;
 }
 
+.link {
+  text-decoration: none;
+  transition: all 1s ease-out;
+}
+
+.link:hover {
+  transform: scale3d(1.2, 1.2, 0.3);
+  border: ivory 1px solid;
+  border-radius: 1rem 1rem;
+}
+
 .navbar-icon {
   display: none;
 }

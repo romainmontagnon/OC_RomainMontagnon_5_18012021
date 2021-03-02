@@ -10,31 +10,16 @@ let cameraCartObject = {
     quantity : ''
 };
 
-
 const localStorageResume = () => {
     //Cart Resume
-
-    //Number of cart items
-    // let cartItems = localStorage.getItem('cartItems');
-    // console.log(cartItems);
-    // if (cartItems===null){
-    //     cartItems=0;
-    //     let cartItemsParsed = parseInt(cartItems, base);
-    //     showNumberOfCartItems(cartItemsParsed);
-    // }
-    // let cartItemsParsed = parseInt(cartItems, base);
-    // showNumberOfCartItems(cartItemsParsed);
-    // console.log(cartItemsParsed);
-
-    //Cart Items Resume
     let arrayCartItemsCallback = localStorage.getItem('arrayCartItems');
     if (arrayCartItemsCallback === null){
         return;
     } else {
     arrayCartItemsCallback = JSON.parse(arrayCartItemsCallback, cameraCartObject);
     console.table(arrayCartItemsCallback);
-    resumeCartItems (Array.from(arrayCartItemsCallback));
-    numberOfCartItems (Array.from(arrayCartItemsCallback));
+    resumeCartItems (Array.from(arrayCartItemsCallback));   //Cart Items Resume
+    numberOfCartItems (Array.from(arrayCartItemsCallback));//Number of cart items Resume
     };
 };
 
@@ -54,28 +39,8 @@ const numberOfCartItems = (arrayOfItems) => {
         console.log (quantity);
     };
     showNumberOfCartItems (quantity);
-    return;
+    return (quantity);
 };
-
-// const numberOfCartItems = () => {
-//     let cartItems = localStorage.getItem('cartItems');
-//     let cartItemsParsed = parseInt(cartItems, base);
-//     //console.log(cartItemsParsed);
-//     let newNumber = 0;
-//     //cartItems = cartItemsArray.length;
-//     for (let i = 0; i < cartItemsArray.length; i++) {
-//         let cartItemsArrayParsed = parseInt(cartItemsArray[i].quantity, base);
-//         // console.log(cartItemsArrayParsed);
-//         newNumber = cartItemsArrayParsed;
-//     }
-//     if (cartItemsParsed <= 0){
-//         cartItemsParsed=0;
-//     }
-//     cartItemsParsed += newNumber;
-//     localStorage.setItem('cartItems', cartItemsParsed);
-//     showNumberOfCartItems(cartItemsParsed);
-// };
-
 
 const clearCart = () => {
     // console.log("appel fonction clear");
@@ -99,7 +64,6 @@ const clearCartDiv = () =>{
 };
 
 const showNumberOfCartItems = (numberOfItems) => {
-    // console.log(typeof(numberOfItems));
     document.getElementById('numberOfCartItems').innerText=numberOfItems;
 };
 
@@ -161,13 +125,8 @@ const createItemForCart = (itemId, itemOption, quantity, data) => {
 
 const arrayCartItems = (item) =>{
     cartItemsArray.push(item);
-
-    //numberOfCartItems();
-    
+    numberOfCartItems(cartItemsArray);
     showCartItems(cartItemsArray);
-    // console.table(cartItemsArray);
-    // console.log(typeof(item));
-    // console.table(item);
     let jsToString = JSON.stringify(cartItemsArray, cameraCartObject);
     console.log(jsToString);
     localStorage.setItem('arrayCartItems', jsToString);
@@ -189,12 +148,21 @@ const showCartItems = (cartItemsArray) =>{
                 <td>
                     <input type="number" value=${cartItemsArray[i].quantity} min=1 max=10 class="form-control" id="inputCartQuantity">
                 </td>
-                <td>${cartItemsArray[i].price}€</td>`;
+                <td>${cartItemsArray[i].price}€</td>
+                <td><button type="button"  id="cartArrayId_${i}" class="cartArrayId btn btn-outline-dark" aria-label="supprimer du panier"><i class="far fa-trash-alt"></i></button></td>`;
     };
     tr.innerHTML=html;
     document.getElementById('showCartItems').appendChild(tr);
+    //supprCartItem();
+    
     return;
 };
+
+const supprCartItem = () =>{
+    let supprCartItem = document.querySelector('.cartArrayId');
+    console.log(supprCartItem);
+};
+
 
 document.getElementById('clear-cart').addEventListener('click', e=>{
     // console.log("CLEAR CART");
@@ -208,9 +176,6 @@ document.getElementById('addToCart').addEventListener('click', e=> {
 
 
 
-
-
-
 // document.getElementById('cart-plus-one').addEventListener('click', e=>{
 //     // console.log("+1");
 //     addOneToCart();
@@ -220,14 +185,12 @@ document.getElementById('addToCart').addEventListener('click', e=> {
 //     minusOneToCart();
 // });
 
-
 // const objectToArray = (object) => {
 // console.log(Array.from(object));
 // let array = Array.from(object);
 // console.table(array);
 // showCartItems (array);
 // };
-
 
 // const addOneToCart = () => {
 //     // console.log("appel fonction +");

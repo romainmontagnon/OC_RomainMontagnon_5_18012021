@@ -31,7 +31,15 @@ $bg-secodary : #6d747c;
 //Class for JS Function END
 
 //CSS rule and Boostrap modifier
-
+.link{
+    text-decoration: none;
+    transition: all 1s ease-out;
+    &:hover{
+        transform: scale3d(1.2, 1.2, 0.3);
+        border: ivory 1px solid;
+        border-radius: 1rem 1rem;
+    }
+}
 //CSS rule and Boostrap modifier END
 
 
