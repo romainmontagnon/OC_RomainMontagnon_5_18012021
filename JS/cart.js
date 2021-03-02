@@ -11,70 +11,71 @@ let cameraCartObject = {
 };
 
 
-
-
 const localStorageResume = () => {
     //Cart Resume
+
     //Number of cart items
-    let cartItems = localStorage.getItem('cartItems');
-    console.log(cartItems);
-    if (cartItems===null){
-        cartItems=0;
-        let cartItemsParsed = parseInt(cartItems, base);
-        showNumberOfCartItems(cartItemsParsed);
-    }
-    let cartItemsParsed = parseInt(cartItems, base);
-    showNumberOfCartItems(cartItemsParsed);
-    console.log(cartItemsParsed);
+    // let cartItems = localStorage.getItem('cartItems');
+    // console.log(cartItems);
+    // if (cartItems===null){
+    //     cartItems=0;
+    //     let cartItemsParsed = parseInt(cartItems, base);
+    //     showNumberOfCartItems(cartItemsParsed);
+    // }
+    // let cartItemsParsed = parseInt(cartItems, base);
+    // showNumberOfCartItems(cartItemsParsed);
+    // console.log(cartItemsParsed);
 
     //Cart Items Resume
     let arrayCartItemsCallback = localStorage.getItem('arrayCartItems');
-    // arrayCartItemsCallback = JSON.parse(arrayCartItemsCallback, cameraCartObject);
+    if (arrayCartItemsCallback === null){
+        return;
+    } else {
+    arrayCartItemsCallback = JSON.parse(arrayCartItemsCallback, cameraCartObject);
     console.table(arrayCartItemsCallback);
-    showCartItems(arrayCartItemsCallback);
+    resumeCartItems (Array.from(arrayCartItemsCallback));
+    numberOfCartItems (Array.from(arrayCartItemsCallback));
+    };
 };
 
-
-const numberOfCartItems = () => {
-    let cartItems = localStorage.getItem('cartItems');
-    let cartItemsParsed = parseInt(cartItems, base);
-    //console.log(cartItemsParsed);
-    let newNumber = 0;
-    //cartItems = cartItemsArray.length;
-    for (let i = 0; i < cartItemsArray.length; i++) {
-        let cartItemsArrayParsed = parseInt(cartItemsArray[i].quantity, base);
-        // console.log(cartItemsArrayParsed);
-        newNumber = cartItemsArrayParsed;
-    }
-    if (cartItemsParsed <= 0){
-        cartItemsParsed=0;
-    }
-    cartItemsParsed += newNumber;
-    localStorage.setItem('cartItems', cartItemsParsed);
-    showNumberOfCartItems(cartItemsParsed);
+const resumeCartItems = (arrayOfItems) => {
+    console.table(arrayOfItems);
+    for (let i = 0; i < arrayOfItems.length; i++) {
+        console.table(arrayOfItems[i]);
+        arrayCartItems(arrayOfItems[i]);
+    };
 };
 
-// const addOneToCart = () => {
-//     // console.log("appel fonction +");
+const numberOfCartItems = (arrayOfItems) => {
+    let quantity = 0;
+    for (let i = 0; i < arrayOfItems.length; i++) {
+        console.table(arrayOfItems[i].quantity);
+        quantity += parseInt(arrayOfItems[i].quantity, base);
+        console.log (quantity);
+    };
+    showNumberOfCartItems (quantity);
+    return;
+};
+
+// const numberOfCartItems = () => {
 //     let cartItems = localStorage.getItem('cartItems');
-//     cartItems++;
-//     if (cartItems <= 0){
-//         cartItems=0;
+//     let cartItemsParsed = parseInt(cartItems, base);
+//     //console.log(cartItemsParsed);
+//     let newNumber = 0;
+//     //cartItems = cartItemsArray.length;
+//     for (let i = 0; i < cartItemsArray.length; i++) {
+//         let cartItemsArrayParsed = parseInt(cartItemsArray[i].quantity, base);
+//         // console.log(cartItemsArrayParsed);
+//         newNumber = cartItemsArrayParsed;
 //     }
-//     localStorage.setItem('cartItems', cartItems);
-//     showNumberOfCartItems(cartItems);
+//     if (cartItemsParsed <= 0){
+//         cartItemsParsed=0;
+//     }
+//     cartItemsParsed += newNumber;
+//     localStorage.setItem('cartItems', cartItemsParsed);
+//     showNumberOfCartItems(cartItemsParsed);
 // };
 
-// const minusOneToCart = () => {
-//     // console.log("appel fonction +");
-//     let cartItems = localStorage.getItem('cartItems');
-//     cartItems--;
-//     if (cartItems <= 0){
-//         cartItems=0;
-//     }
-//     localStorage.setItem('cartItems', cartItems);
-//     showNumberOfCartItems(cartItems);
-// };
 
 const clearCart = () => {
     // console.log("appel fonction clear");
@@ -83,16 +84,19 @@ const clearCart = () => {
 
     let itemsInCart = localStorage.getItem('arrayCartItems');
     itemsInCart = {};
+    let jsToString = JSON.stringify(itemsInCart, cameraCartObject);
 
     cartItemsParsed = 0;
-    cartItemsArray = new Array();
-    localStorage.setItem('arrayCartItems', itemsInCart);
+    localStorage.setItem('arrayCartItems', jsToString);
     localStorage.setItem('cartItems', cartItemsParsed);
     showNumberOfCartItems(cartItemsParsed);
-    document.getElementById('showCartItems').innerHTML=" ";
+    clearCartDiv();
     return;
 };
 
+const clearCartDiv = () =>{
+    document.getElementById('showCartItems').innerHTML=" ";    
+};
 
 const showNumberOfCartItems = (numberOfItems) => {
     // console.log(typeof(numberOfItems));
@@ -155,13 +159,14 @@ const createItemForCart = (itemId, itemOption, quantity, data) => {
     };
 };
 
-
 const arrayCartItems = (item) =>{
     cartItemsArray.push(item);
-    numberOfCartItems(cartItemsArray);
+
+    //numberOfCartItems();
+    
     showCartItems(cartItemsArray);
-    console.table(cartItemsArray);
-    console.log(typeof(item));
+    // console.table(cartItemsArray);
+    // console.log(typeof(item));
     // console.table(item);
     let jsToString = JSON.stringify(cartItemsArray, cameraCartObject);
     console.log(jsToString);
@@ -191,6 +196,21 @@ const showCartItems = (cartItemsArray) =>{
     return;
 };
 
+document.getElementById('clear-cart').addEventListener('click', e=>{
+    // console.log("CLEAR CART");
+    clearCart();
+});
+
+document.getElementById('addToCart').addEventListener('click', e=> {
+    readQuantityOption ();
+});
+
+
+
+
+
+
+
 // document.getElementById('cart-plus-one').addEventListener('click', e=>{
 //     // console.log("+1");
 //     addOneToCart();
@@ -200,11 +220,33 @@ const showCartItems = (cartItemsArray) =>{
 //     minusOneToCart();
 // });
 
-document.getElementById('clear-cart').addEventListener('click', e=>{
-    // console.log("CLEAR CART");
-    clearCart();
-});
 
-document.getElementById('addToCart').addEventListener('click', e=> {
-    readQuantityOption ();
-});
+// const objectToArray = (object) => {
+// console.log(Array.from(object));
+// let array = Array.from(object);
+// console.table(array);
+// showCartItems (array);
+// };
+
+
+// const addOneToCart = () => {
+//     // console.log("appel fonction +");
+//     let cartItems = localStorage.getItem('cartItems');
+//     cartItems++;
+//     if (cartItems <= 0){
+//         cartItems=0;
+//     }
+//     localStorage.setItem('cartItems', cartItems);
+//     showNumberOfCartItems(cartItems);
+// };
+
+// const minusOneToCart = () => {
+//     // console.log("appel fonction +");
+//     let cartItems = localStorage.getItem('cartItems');
+//     cartItems--;
+//     if (cartItems <= 0){
+//         cartItems=0;
+//     }
+//     localStorage.setItem('cartItems', cartItems);
+//     showNumberOfCartItems(cartItems);
+// };

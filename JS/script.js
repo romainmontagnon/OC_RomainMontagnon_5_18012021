@@ -16,27 +16,27 @@ const showResult = (items) => {
 
 const showProduct = (items) => {
     let paramString=window.location.href;
-    console.log(paramString);
+    // console.log(paramString);
     let searchParams = new URL(paramString).searchParams;
-    console.log(searchParams.get('id'));
+    // console.log(searchParams.get('id'));
 
-    console.log('showProduct()');
+    // console.log('showProduct()');
     let itemID = searchParams.get('id');
     //console.log(itemID);
     for (let i = 0; i < items.length; i++){
         let itemsID = (items[i]._id);
-        console.log(itemsID);
+        // console.log(itemsID);
         if(itemID===itemsID){
-            console.warn(itemID);
+            // console.warn(itemID);
             productPageDetails(items[i]);
         } else {
-            console.error(itemsID);
+            // console.error(itemsID);
         };
     };
 };
 
 const productPageDetails = (e) =>{
-    console.log(e);
+    // console.log(e);
     let div = document.createElement('div');
     let html =  `
                 <div id="carouselLanding" class="carousel slide position-relative" data-bs-ride="carousel">
@@ -112,13 +112,13 @@ const fetchRequest = () =>{
 };
 
 const productFetchRequest = () =>{
-    console.log('Lancement de la requete FETCH');
+    //console.log('Lancement de la requete FETCH');
     fetch("http://localhost:3000/api/cameras")
         .then(function (response){
             return  response.json();
         })
         .then(function (result){
-            console.table(result);
+            //console.table(result);
             showProduct(result);
         });
 };
