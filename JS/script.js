@@ -41,26 +41,26 @@ const productPageDetails = (e) =>{
     let html =  `
                 <div id="carouselLanding" class="carousel slide position-relative" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                    <div class="carousel-item active" id="product-img">
-                        <img src=${e.imageUrl} class="d-block w-100" alt="appareil fujifilm">
-                    </div>
+                        <div class="carousel-item active" id="product-img">
+                            <img src=${e.imageUrl} class="d-block w-100" alt="appareil fujifilm">
+                        </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-8">
-                        <h2 class="text-dark fw-normal my-3">${e.name}</h2>
+                        <h2 class="text-dark fw-normal my-3" id='itemInfo' data-item-name='${e.name}' data-item-id=${e._id} data-item-price=${e.price} data-item-image-url=${e.imageUrl}>${e.name}</h2>
                         <h3 class="text-dark fw-normal my-3">Description</h3>
-                        <p class="ps-4">${e.description}</p>`;
+                        <p class="ps-4">${e.description}</p>
+                    </div>`;
                         
                     html+=`                        
-                    </div>
                     <div class="col-4">
                         <h3 class="text-dark fw-normal my-3">Options</h3>
                         <div>`;
                         for (let i = 0; i < e.lenses.length; i++) {                        
                         html+=`
                             <div class="form-check form-switch">
-                            <input class="form-check-input item-option" checked type="radio" data-item-id=${e._id} data-lense-id="${e.lenses[i]}" name="flexRadioDefault" id="flexRadioDefault1">
+                            <input class="form-check-input item-option" checked type="radio" data-item-id=${e._id} data-lense-id="${e.lenses[i]}" name="lense" id="lense1">
                             <label class="form-check-label" for="flexRadioDefault1">
                                 ${e.lenses[i]}
                             </label>
@@ -75,7 +75,7 @@ const createLi = (item) =>{
     let html = `
                 <div class="card bg-light my-3 mx-auto w-75">
                     <div class="card-body">
-                        <img src=${item.imageUrl} class="card-img-top" alt="photo du produit ${item.name}" class="mw-100">
+                        <img src=${item.imageUrl} class="card-img-top mw-100" alt="photo du produit ${item.name}">
                         <h5 class="card-title">${item.name}</h5>
                         <p class="card-text px-4">${item.description}</p>
                         <ul class="list-unstyled">

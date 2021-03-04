@@ -56,6 +56,45 @@
                 <a href="#">Link 3</a>
             </div>
         </div>
+        <table class="table">
+  <thead>
+    <tr>
+      
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="">
+          <img scr="http://localhost:3000/images/vcam_1.jpg" width="100" height="100" alt="photo du produit ${items[i].name}">
+      </td>
+      <td>${items[i].name}</td>
+      <td>${items[i].itemOption}</td>
+      <td>
+          <input type="number" value=${items[i].quantity} min=1 max=10 class="form-control" id="inputCartQuantity">
+      </td>
+      <td>${items[i].price}€</td>
+      <td>
+          <button type="button" onclick=(supprCartItem();) class="cartItemId btn btn-outline-dark" aria-label="supprimer du panier">
+              <i class="far fa-trash-alt"></i>
+          </button>
+      </td>
+    </tr>
+    <tr>
+      
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      
+      <td colspan="2">Larry the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
     </body>
     <script>
         /* When the user clicks on the button, 

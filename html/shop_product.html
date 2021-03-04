@@ -17,7 +17,7 @@
         <script src="https://kit.fontawesome.com/844f2c68d0.js" crossorigin="anonymous"></script>
     </head>
 
-    <body class="container-lg bg-secondary" onload="localStorageResume(); productFetchRequest ();">
+    <body class="container-lg bg-secondary" onload="productFetchRequest();">
         <main>
             <header>
                 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
@@ -57,11 +57,11 @@
                                         <table class="table table-secondary">
                                             <thead>
                                                 <tr>
-                                                <th scope="col">Produits</th>
-                                                <th scope="col">Option</th>
-                                                <th scope="col">Quantité</th>
-                                                <th scope="col">Prix</th>
-                                                <th scope="col"></th>
+                                                    <th scope="col">Produits</th>
+                                                    <th scope="col">Option</th>
+                                                    <th scope="col">Quantité</th>
+                                                    <th scope="col">Prix</th>
+                                                    <th scope="col"></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="showCartItems">
@@ -72,7 +72,7 @@
                                         <button type="button"  id="clear-cart" class="btn btn-outline-light" aria-label="supprimer du panier"><i class="far fa-trash-alt me-2"></i>Vider le panier</button>
                                     </li>
                                     <li class="nav-item list-group-item bg-dark">
-                                        <a class="nav-link active text-light px-0" href="#">
+                                        <a class="nav-link active text-light px-0" href="cart.html">
                                             <button type="button" id="" class="btn btn-outline-light" aria-label="Valider le panier"><i class="fas fa-money-bill-wave me-2"></i>Valider le panier</button>
                                         </a>
                                     </li>
@@ -92,9 +92,7 @@
                     <h2 class="text-dark my-3">Orinico Camera - Détail du produit</h2>
                     <div id="myProductDetail">
                     </div>
-                    
-
-                <div class="row">
+                    <div class="row">
                     <div class="col-8">
                         <div class="input-group mb-3 number-input">
                             <label class="input-group-text" for="inputQuantity">Quantité</label>
@@ -102,7 +100,7 @@
                         </div>
                     </div>
                     <div class="col-4">
-                        <button type="button" id="addToCart" class="col btn btn-primary" onclick="addToCart()">Ajouter au pannier</button>
+                        <button type="button" id="addToCart" class="col btn btn-primary">Ajouter au pannier</button>
                     </div>
                 </div>
             </section>
