@@ -149,7 +149,7 @@ const showCartItems = (cartItemsArray) =>{
                     <input type="number" value=${cartItemsArray[i].quantity} min=1 max=10 class="form-control" id="inputCartQuantity">
                 </td>
                 <td>${cartItemsArray[i].price}€</td>
-                <td><button type="button"  id="cartArrayId_${i}" class="cartArrayId btn btn-outline-dark" aria-label="supprimer du panier"><i class="far fa-trash-alt"></i></button></td>`;
+                <td><button type="button" onclick=(supprCartItem()) class="cartItemId btn btn-outline-dark" aria-label="supprimer du panier"><i class="far fa-trash-alt"></i></button></td>`;
     };
     tr.innerHTML=html;
     document.getElementById('showCartItems').appendChild(tr);
@@ -159,8 +159,15 @@ const showCartItems = (cartItemsArray) =>{
 };
 
 const supprCartItem = () =>{
-    let supprCartItem = document.querySelector('.cartArrayId');
-    console.log(supprCartItem);
+    let supprCartItem = document.querySelectorAll('.cartItemId');
+    // console.log(supprCartItem);
+    supprCartItem.forEach(event => {
+        console.log(event);
+        // event.addEventListener('clic', e=>{
+        //     console.log(e);
+        // });
+        
+    });
 };
 
 
@@ -169,10 +176,12 @@ document.getElementById('clear-cart').addEventListener('click', e=>{
     clearCart();
 });
 
-document.getElementById('addToCart').addEventListener('click', e=> {
-    readQuantityOption ();
-});
-
+const addToCart = () =>{
+    document.getElementById('addToCart').addEventListener('click', e=> {
+        e.stopImmediatePropagation();
+        readQuantityOption ();
+    });
+};
 
 
 
