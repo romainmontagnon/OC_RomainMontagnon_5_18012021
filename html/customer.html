@@ -101,23 +101,50 @@
                           </div>
                         </div>
                     </div>
-                    <h3 class="text-dark my-3">Mon panier</h3>
+                    <h3 class="text-dark my-3">Mes informations</h3>
                     <div class="my-3">
-                        <table class="table table-secondary">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Produits</th>
-                                    <th scope="col">Option</th>
-                                    <th scope="col">Quantité</th>
-                                    <th scope="col">Prix</th>
-                                    <th scope="col"></th>
-                                </tr>
-                            </thead>
-                            <tbody id="showCartDetails">
-                            </tbody>
-                        </table>
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="emailAdress" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="emailAdress" placeholder="123@abc.io" aria-label="adresse email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="firstName" class="col-sm-2 col-form-label">Pr&eacute;nom(s)</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="John"  aria-label="prénoms">
+                            </div>
+                            <div class="col-4">
+                                <label for="lastName" class="col-sm-2 col-form-label">Nom</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="Doe" aria-label="nom">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <label for="streetNumber" class="col-sm-2 col-form-label">Numero</label>
+                                <input type="text" class="form-control" id="streetNumber" placeholder="55"  aria-label="numero de rue">
+                            </div>
+                            <div class="col-7">
+                                <label for="streetName" class="col-sm-2 col-form-label">Rue</label>
+                                <input type="text" class="form-control" id="streetName" placeholder="Rue du Faubourg Saint-Honor&eacute;"  aria-label="nom de rue ou lieux-dit">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <label for="zipCode" class="col-sm-2 col-form-label">CP</label>
+                                <input type="text" class="form-control" id="zipCode" placeholder="75008"  aria-label="code postal">
+                            </div>
+                            <div class="col-3">
+                                <label for="city" class="col-sm-2 col-form-label">Rue</label>
+                                <input type="text" class="form-control" id="city" placeholder="Paris"  aria-label="ville">
+                            </div>
+                            <div class="col-3">
+                                <label for="country" class="col-sm-2 col-form-label">Pays</label>
+                                <input type="text" class="form-control" id="country" placeholder="France"  aria-label="pays">
+                            </div>
+                        </div>
                     </div>
-                    <div class="d-flex justify-content-end mb-2" id="cartPrice">
+                    <div class="d-flex justify-content-end" id="cartPrice">
                         <div class="d-flex text-light px-3">
                                 <span class="btn-light rounded" id="writeCartPrice">
                                 test
@@ -132,28 +159,18 @@
                                 </button>
                             </a>
                         </div>
-                        <div class=" d-flex">
-                            <button type="button"  id="clear-cart-page" class="btn btn-dark  pt-0 pb-0 h-75 my-auto" aria-label="supprimer du panier">
-                                <i class="far fa-trash-alt me-2"></i>
-                                Vider le panier
-                            </button>
-                        </div>
                         <div class="d-flex">
-                            <a href="customer.html" id="cartValidation" class="nav-link active text-light">
-                                <button type="button" class="btn btn-dark">
-                                    Valider le panier
+                            <a href="http://www.rmfactory.eu/" class="nav-link active text-light" id="validationFormulaire">
+                                <button type="button" class="btn btn-dark" aria-label="proceder au paiement">
+                                    Paiement
                                 </button>
                             </a>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col">
-                            <h3 class="text-dark my-3">Livraison</h3>
+                        <div class="col-6">
+                            <h3 class="text-dark my-3">Les options de paiement</h3>
                           <p></p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci expedita vero odit numquam quia, quibusdam commodi sequi quidem eos, doloremque facere accusantium harum qui. Error laudantium deleniti velit repellendus itaque?</p>
-                        </div>
-                        <div class="col">
-                            <h3 class="text-dark my-3">Conditions générales de vente</h3>
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci expedita vero odit numquam quia, quibusdam commodi sequi quidem eos, doloremque facere accusantium harum qui. Error laudantium deleniti velit repellendus itaque?</p>
                         </div>
                     </div>
                 </div>
@@ -190,6 +207,7 @@
         <script src="../js/script.js"></script>
         <script src="../js/navbar.js"></script>
         <script src="../js/cart.js"></script>
+        <script src="../JS/payment.js"></script>
         <script src="../js/index.js"></script>
         <!-- Integration frameworks JS pour Boostrap 5.0.0 -->
         <!-- /!\ Frameworks JS Boostrap 5.0.0 desactiver car projet en vanilla JS -->

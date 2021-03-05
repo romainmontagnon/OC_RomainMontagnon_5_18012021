@@ -247,22 +247,29 @@ const readItemInfo = () =>{
     // console.table(cartItemsArray);
 };
 
-const onLoadEventListener = () => {
+const clearCartPageListener = () => {
     let clearCartPage = document.getElementById('clear-cart-page');
-    if (clearCartPage== null){
+    if (clearCartPage == null){
         return;
     } else {
         clearCartPage.addEventListener('click', e=>{
             clearCart();
         });
     };
+};
 
-    let clearCart = document.getElementById('clear-cart');
-    if (clearCart== null){
+const cartValidationPageListener = () => {
+    let cartValidation = document.getElementById('cartValidation');
+    if (cartValidation == null){
         return;
     } else {
-        clearCart.addEventListener('click', e=>{
-            clearCart();
+        cartValidation.addEventListener('click', e=>{
+            if (cartItemsArray == ''){
+                e.preventDefault();
+                alert('Votre panier est vide');
+            } else {
+                return;
+            };
         });
     };
 };
@@ -270,8 +277,12 @@ const onLoadEventListener = () => {
 document.onload = localStorageResume();
 document.onload = addToCart();
 document.onload = showCartDetails();
-document.onload = onLoadEventListener();
+document.onload = clearCartPageListener();
+document.onload = cartValidationPageListener();
 
+document.getElementById('clear-cart').addEventListener('click', e=>{
+    clearCart();
+});
 // document.getElementById('addToCart').addEventListener('click', e=> {
 //     readItemInfo ();
 // });
