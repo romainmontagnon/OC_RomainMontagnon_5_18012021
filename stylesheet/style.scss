@@ -8,6 +8,7 @@ $mobile : 576px;
 
 //Color
 $bg-secodary : #6d747c;
+$bg-table :#e2e3e5;
 //Fin Declaration des variables
 
 //Dropdown Menu
@@ -38,6 +39,24 @@ $bg-secodary : #6d747c;
         transform: scale3d(1.2, 1.2, 0.3);
         border: ivory 1px solid;
         border-radius: 1rem 1rem;
+    }
+}
+
+#cartPrice{
+    line-height: 3rem;
+    div span{
+        padding: 0rem 0.5rem;
+        font-weight: 700;
+        background-color: $bg-table;
+    }
+}
+
+#cartPriceDropdown{
+    line-height: 2rem;
+    div span{
+        padding: 0rem 0.5rem;
+        font-weight: 500;
+        background-color: $bg-table;
     }
 }
 //CSS rule and Boostrap modifier END

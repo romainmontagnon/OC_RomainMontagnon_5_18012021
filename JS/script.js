@@ -14,25 +14,33 @@ const showResult = (items) => {
     };
 };
 
-const showProduct = (items) => {
+const showProductDetailFetch = () => {
     let paramString=window.location.href;
     // console.log(paramString);
     let searchParams = new URL(paramString).searchParams;
     // console.log(searchParams.get('id'));
 
-    // console.log('showProduct()');
+    // console.log('showProductDetailFetch()');
     let itemID = searchParams.get('id');
-    //console.log(itemID);
-    for (let i = 0; i < items.length; i++){
-        let itemsID = (items[i]._id);
-        // console.log(itemsID);
-        if(itemID===itemsID){
-            // console.warn(itemID);
-            productPageDetails(items[i]);
-        } else {
-            // console.error(itemsID);
-        };
+    if (itemID === null){
+        return;
+    } else {
+        console.log(itemID);
+        let hostAdress = 'http://localhost:3000/api/cameras/';
+        let url = hostAdress+itemID;
+        console.log(url);
+
+        fetch(url)
+            .then(function (response){
+                return  response.json();
+            })
+            .then(function (result){
+                console.table(result);
+                productPageDetails(result);
+                //showProductDetailFetch(result);
+            });
     };
+
 };
 
 const productPageDetails = (e) =>{
@@ -95,11 +103,16 @@ const createLi = (item) =>{
     li.innerHTML = html;
     // console.log(li);
     // console.log(item.imageUrl);
-    document.getElementById('myList').appendChild(li);
+    let myList = document.getElementById('myList');
+    if (myList === null){
+        return;
+    } else {
+        myList.appendChild(li);
+    };
     return li;
 };
 
-const fetchRequest = () =>{
+const showProductsFetch = () =>{
     console.log('Lancement de la requete FETCH');
     fetch("http://localhost:3000/api/cameras")
         .then(function (response){
@@ -111,14 +124,69 @@ const fetchRequest = () =>{
         });
 };
 
-const productFetchRequest = () =>{
-    //console.log('Lancement de la requete FETCH');
-    fetch("http://localhost:3000/api/cameras")
-        .then(function (response){
-            return  response.json();
-        })
-        .then(function (result){
-            //console.table(result);
-            showProduct(result);
-        });
+const onLoadFunctionCall = ()=>{
+    let url = window.location.href;
+    // console.log(url);
+    let pageShop = url.search('shop.html');
+    let pageShopProduct = url.search('shop_product.html')
+    // console.log(pageShop);
+    // console.log(pageShopProduct);
+    if (pageShop != -1){
+        console.log('page Boutique');
+        showProductsFetch();
+    } else if (pageShopProduct != -1){
+        console.log('page Details Produit');
+        showProductDetailFetch();
+    } else {
+        return;
+    };
 };
+
+document.onload = onLoadFunctionCall ();
+
+// const productFetchRequest = () =>{
+//     //console.log('Lancement de la requete FETCH');
+//     fetch("http://localhost:3000/api/cameras")
+//         .then(function (response){
+//             return  response.json();
+//         })
+//         .then(function (result){
+//             console.table(result);
+//             showProductDetailFetch(result);
+//         });
+// };
+
+// const productFetchRequest = () =>{
+//     showProductDetailFetch();
+//     console.log('Lancement de la requete FETCH');
+//     fetch("http://localhost:3000/api/cameras/5be1ed3f1c9d44000030b061")
+//         .then(function (response){
+//             return  response.json();
+//         })
+//         .then(function (result){
+//             console.table(result);
+//             showProductDetailFetch(result);
+//         });
+// };
+
+
+// const showProductDetailFetch = (items) => {
+//     let paramString=window.location.href;
+//     // console.log(paramString);
+//     let searchParams = new URL(paramString).searchParams;
+//     // console.log(searchParams.get('id'));
+
+//     // console.log('showProductDetailFetch()');
+//     let itemID = searchParams.get('id');
+//     //console.log(itemID);
+//     for (let i = 0; i < items.length; i++){
+//         let itemsID = (items[i]._id);
+//         // console.log(itemsID);
+//         if(itemID===itemsID){
+//             // console.warn(itemID);
+//             productPageDetails(items[i]);
+//         } else {
+//             // console.error(itemsID);
+//         };
+//     };
+// };

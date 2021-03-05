@@ -24,39 +24,44 @@ const addToCart = () => {
 const localStorageResume = () => {
     //Cart Resume
     let arrayCartItemsCallback = localStorage.getItem('arrayCartItems');
-    console.table(arrayCartItemsCallback);
+    // console.table(arrayCartItemsCallback);
     if (arrayCartItemsCallback === null){
         return;
     } else {
         arrayCartItemsCallback = JSON.parse(arrayCartItemsCallback, cameraCartObject);
-        console.table(arrayCartItemsCallback);
+        // console.table(arrayCartItemsCallback);
         resumeCartItems (Array.from(arrayCartItemsCallback));   //Cart Items Resume
         numberOfCartItems (Array.from(arrayCartItemsCallback));//Number of cart items Resume
+        //cartPrice();
+
     };
     return;
 };
 
 const storeToLocalStorage = (items) =>{
-    console.table(items)
+    // console.table(items)
     let jsToString = JSON.stringify(items, cameraCartObject);
     localStorage.setItem('arrayCartItems', jsToString);
 };
 
 const resumeCartItems = (arrayOfItems) => {
     console.table(arrayOfItems);
-    for (let i = 0; i < arrayOfItems.length; i++){
-        console.table(arrayOfItems[i]);
-        let object = {
-        name : arrayOfItems[i].name,
-        _id : arrayOfItems[i]._id,
-        itemOption : arrayOfItems[i].itemOption,
-        price : arrayOfItems[i].price,
-        imageUrl : arrayOfItems[i].imageUrl,
-        quantity : arrayOfItems[i].quantity
-    };
-  
-    cartItemsArray.push(object);
-    console.table(arrayOfItems);
+    if (arrayOfItems == ''){
+        console.log('hello');
+    } else{
+        for (let i = 0; i < arrayOfItems.length; i++){
+            console.table(arrayOfItems[i]);
+            let object = {
+                name : arrayOfItems[i].name,
+                _id : arrayOfItems[i]._id,
+                itemOption : arrayOfItems[i].itemOption,
+                price : arrayOfItems[i].price,
+                imageUrl : arrayOfItems[i].imageUrl,
+                quantity : arrayOfItems[i].quantity
+            };
+            cartItemsArray.push(object);
+            console.table(arrayOfItems);
+        };
     };
     showCartItems(cartItemsArray);
 };
@@ -64,10 +69,10 @@ const resumeCartItems = (arrayOfItems) => {
 const numberOfCartItems = (arrayOfItems) => {
     let quantity = 0;
     for (let i = 0; i < arrayOfItems.length; i++) {
-        console.table(arrayOfItems[i].quantity);
+        // console.table(arrayOfItems[i].quantity);
         let base=10;
         quantity += parseInt(arrayOfItems[i].quantity, base);
-        console.log (quantity);
+        // console.log (quantity);
     };
     showNumberOfCartItems (quantity);
     return (quantity);
@@ -102,31 +107,57 @@ const supprCartItem = () =>{
     });
 };
 
+const cartPrice = () => {
+    let writeCartPrice = document.getElementById('writeCartPrice');
+    let writeCartPriceDropdown = document.getElementById('writeCartPriceDropdown');
+
+    let calcul = 0;
+    for (let i= 0; i< cartItemsArray.length; i++){
+        let price = cartItemsArray[i].price;
+        let quantity = cartItemsArray[i].quantity;
+        calcul += (price*quantity);
+        console.log(price, quantity, calcul);           
+    };
+
+    writeCartPriceDropdown.textContent='TOTAL : '+calcul+'€';
+    if (writeCartPrice == null){
+        return;
+    } else {
+        writeCartPrice.textContent='TOTAL : '+calcul+'€';
+    };
+};
+
 const showNumberOfCartItems = (numberOfItems) => {
     document.getElementById('numberOfCartItems').innerText=numberOfItems;
 };
 
 const showCartItems = (myArray) =>{
     console.table(myArray);
-    let tr = document.createElement('tr');
-    let html = ``;
-    for (let i = 0; i < myArray.length; i++) {
-        console.log(myArray[i]);
-         html = `<tr>
-                <td>${myArray[i].name}</td>
-                <td>${myArray[i].itemOption}</td>
-                <td>
-                    <input type="number" value=${myArray[i].quantity} min=1 max=10 class="form-control" id="inputCartQuantity">
-                </td>
-                <td>${myArray[i].price}€</td>
-                <td>
-                    <button type="button" onclick=(supprCartItem()) class="cartItemId btn btn-outline-dark" aria-label="supprimer du panier">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-                </td>`;
+    if (myArray == ''){
+        console.log('la panier est vide');
+        showEmptyCart('showCartItems');
+    } else {
+        clearCartDiv();
+        for (let i = 0; i < myArray.length; i++) {
+            console.log(myArray[i]);
+            let tr = document.createElement('tr');
+            let html = ``;
+            html = `<tr>
+                    <td>${myArray[i].name}</td>
+                    <td>${myArray[i].itemOption}</td>
+                    <td>
+                        <input type="number" value=${myArray[i].quantity} min=1 max=10 class="form-control" id="inputCartQuantity">
+                    </td>
+                    <td>${myArray[i].price}€</td>
+                    <td>
+                        <button type="button" class="cartItemId btn btn-outline-dark" aria-label="supprimer du panier">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </td>`;
+            htmlToTr(tr, html,'showCartItems');
+        };
     };
-    tr.innerHTML=html;
-    document.getElementById('showCartItems').appendChild(tr);
+
     numberOfCartItems(myArray);
     storeToLocalStorage(myArray);
     //supprCartItem();
@@ -136,26 +167,56 @@ const showCartItems = (myArray) =>{
 const showCartDetails = () =>{
     let items = cartItemsArray;
     console.table(items);
+    if (items == ''){
+        console.log('la page panier est vide');
+        showEmptyCart('showCartDetails');
+        cartPrice();
+    } else {
+        for (let i = 0; i < items.length; i++) {
+            console.log(items[i].quantity);
+            let tr = document.createElement('tr');
+        let html = ``;
+            html = `
+                    <td>${items[i].name} toto</td>
+                    <td>${items[i].itemOption}</td>
+                    <td>
+                        <input type="number" value=${items[i].quantity} min=1 max=10 class="form-control" id="inputCartQuantity">
+                    </td>
+                    <td>${items[i].price}€</td>
+                    <td>
+                        <button type="button" class="cartItemId btn btn-outline-dark" aria-label="supprimer du panier">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </td>`;
+                htmlToTr(tr, html,'showCartDetails');
+        };
+        cartPrice();
+    };
+    //htmlToTr(tr, html,'showCartDetails');
+    return;
+};
+
+const showEmptyCart = (divId) => {
     let tr = document.createElement('tr');
     let html = ``;
-    for (let i = 0; i < items.length; i++) {
-         html = `
-                <td>${items[i].name}</td>
-                <td>${items[i].itemOption}</td>
-                <td>
-                    <input type="number" value=${items[i].quantity} min=1 max=10 class="form-control" id="inputCartQuantity">
-                </td>
-                <td>${items[i].price}€</td>
-                <td>
-                    <button type="button" onclick=(supprCartItem();) class="cartItemId btn btn-outline-dark" aria-label="supprimer du panier">
-                        <i class="far fa-trash-alt"></i>
-                    </button>
-                </td>`;
+        html = `
+                <td>Votre panier est vide</td>
+                <td>Votre panier est vide</td>
+                <td>Votre panier est vide</td>
+                <td>Votre panier est vide</td>
+                <td>Votre panier est vide</td>
+        `;
+    htmlToTr(tr, html,divId);
+};
+
+const htmlToTr = (tr, html,divId) =>{
+    tr.innerHTML+=html;
+    let showCartDetails = document.getElementById(divId);
+    if (showCartDetails === null){
+        return;
+    } else {
+        showCartDetails.appendChild(tr)
     };
-    tr.innerHTML=html;
-    document.getElementById('showCartDetails').appendChild(tr);
-    // //supprCartItem();
-    return;
 };
 
 const readItemInfo = () =>{
@@ -186,14 +247,30 @@ const readItemInfo = () =>{
     // console.table(cartItemsArray);
 };
 
+const onLoadEventListener = () => {
+    let clearCartPage = document.getElementById('clear-cart-page');
+    if (clearCartPage== null){
+        return;
+    } else {
+        clearCartPage.addEventListener('click', e=>{
+            clearCart();
+        });
+    };
+
+    let clearCart = document.getElementById('clear-cart');
+    if (clearCart== null){
+        return;
+    } else {
+        clearCart.addEventListener('click', e=>{
+            clearCart();
+        });
+    };
+};
+
 document.onload = localStorageResume();
 document.onload = addToCart();
 document.onload = showCartDetails();
-
-document.getElementById('clear-cart').addEventListener('click', e=>{
-    // console.log("CLEAR CART");
-    clearCart();
-});
+document.onload = onLoadEventListener();
 
 // document.getElementById('addToCart').addEventListener('click', e=> {
 //     readItemInfo ();

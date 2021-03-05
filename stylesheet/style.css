@@ -26,6 +26,26 @@
   border-radius: 1rem 1rem;
 }
 
+#cartPrice {
+  line-height: 3rem;
+}
+
+#cartPrice div span {
+  padding: 0rem 0.5rem;
+  font-weight: 700;
+  background-color: #e2e3e5;
+}
+
+#cartPriceDropdown {
+  line-height: 2rem;
+}
+
+#cartPriceDropdown div span {
+  padding: 0rem 0.5rem;
+  font-weight: 500;
+  background-color: #e2e3e5;
+}
+
 .navbar-icon {
   display: none;
 }
