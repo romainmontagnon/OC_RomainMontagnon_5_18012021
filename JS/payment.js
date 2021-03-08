@@ -1,4 +1,4 @@
-let customerInfo = {
+let contact = {
     gender          : '',
     emailAdress     : '',
     phone           : '',
@@ -8,9 +8,19 @@ let customerInfo = {
     streetName      : '',
     zipCode         : '',
     city            : '',
-    country         : ''
+    country         : '',
+    cardName        : '',
+    cardCrypto      : '',
+    cardNumber      : ''
 };
 
+let paiementPossible = false;
+
+const storeToSessionStorage = (items, sessionStorageKey) =>{
+    // console.table(items)
+    let jsToString = JSON.stringify(items, sessionStorageKey);
+    sessionStorage.setItem(sessionStorageKey, jsToString);
+};
 
 const lireFormulaireClient = () => {
     let gender          = document.querySelector("input[name='gender']:checked");
@@ -23,6 +33,9 @@ const lireFormulaireClient = () => {
     let zipCode         = document.getElementById('zipCode');
     let city            = document.getElementById('city');
     let country         = document.getElementById('country');
+    let cardName        = document.getElementById('cardName');
+    let cardCrypto      = document.getElementById('cardCrypto');
+    let cardNumber      = document.getElementById('cardNumber');
     let requiredForm    = document.getElementById('requiredForm');
     
     let array = [
@@ -34,7 +47,10 @@ const lireFormulaireClient = () => {
         streetName      = streetName,
         zipCode         = zipCode,
         city            = city,
-        country         = country
+        country         = country,
+        cardName        = cardName,
+        cardCrypto      = cardCrypto,
+        cardNumber      = cardNumber
     ];
     
     console.log(array);
@@ -51,32 +67,38 @@ const lireFormulaireClient = () => {
             requiredForm.classList.remove('noValidForm');
             array[i].classList.add('validForm');
             array[i].classList.remove('noValidForm');
-            //customerInfo.array[i].id = array[i].value;
+            //contact.array[i].id = array[i].value;
         } else if (!checkValidityTest) {
             requiredForm.classList.add('noValidForm');
             array[i].classList.add('noValidForm');
             array[i].classList.remove('validForm');
         };
-        console.log(checkValidityTest);   
+        console.log(checkValidityTest);
     };
 
     let test = checkValidityTest(array);
     if (test === true){
-        console.log("formulaire ok, création de l'objet customerInfo");
-        customerInfo.gender         = gender.value;
-        customerInfo.emailAdress    = emailAdress.value;
-        customerInfo.phone          = phone.value;
-        customerInfo.firstName      = firstName.value;
-        customerInfo.lastName       = lastName.value;
-        customerInfo.streetNumber   = streetNumber.value;
-        customerInfo.streetName     = streetName.value;
-        customerInfo.zipCode        = zipCode.value;
-        customerInfo.city           = city.value;
-        customerInfo.country        = country.value;
-    };
-    console.log(customerInfo);
-};
+        console.log("formulaire ok, complétion de l'objet contact");
+        contact.gender         = gender.value;
+        contact.emailAdress    = emailAdress.value;
+        contact.phone          = phone.value;
+        contact.firstName      = firstName.value;
+        contact.lastName       = lastName.value;
+        contact.streetNumber   = streetNumber.value;
+        contact.streetName     = streetName.value;
+        contact.zipCode        = zipCode.value;
+        contact.city           = city.value;
+        contact.country        = country.value;
+        contact.cardName       = cardName.value;
+        contact.cardCrypto     = cardCrypto.value;
+        contact.cardNumber     = cardNumber.value;
 
+        storeToSessionStorage(contact, 'contact');
+    } else {
+        return;
+    };
+    console.log(contact);
+};
 
 const checkValidityTest = (array) =>{
     /*
@@ -87,14 +109,16 @@ const checkValidityTest = (array) =>{
         let checkValidityTest = array[i].checkValidity(array[i])
         if (checkValidityTest){
             array[i].classList.remove('noValidForm');
+            paiementPossible = true;
             return true;
         } else if (!checkValidityTest) {
             requiredForm.classList.add('noValidForm');
+            validationFormulaire.classList.remove('noValidForm');
+            paiementPossible = false;
             return false;
         };
     };
 };
-
 
 const validationFormulaireListener = () => {
     console.log('je suis loader')
@@ -107,6 +131,20 @@ const validationFormulaireListener = () => {
             console.log('hello');
             e.preventDefault();
             lireFormulaireClient();
+            if(!paiementPossible){
+                e.preventDefault();
+                validationFormulaire.classList.add('noValidForm');
+                //alert("N'oubliez pas de valider vos infos personnelles");
+            } else {
+                fetch("http://localhost:3000/api/order",{
+                    method: 'PUT',
+                    body: JSON.stringify(contact),
+                    headers: {'Content-type': 'application/json; charset=UTF-8',},
+                })
+                .then((response) => response.json())
+                .then((json) => console.log(json))
+                .catch(error => console.log('error', error));
+            };
         });
     };
 };
