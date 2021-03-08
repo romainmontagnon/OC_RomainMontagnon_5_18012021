@@ -7,7 +7,7 @@ $tablet : 768px;
 $mobile : 576px;
 
 //Color
-$bg-secodary : #6d747c;
+$bg-secondary : #6d747c;
 $bg-table :#e2e3e5;
 //Fin Declaration des variables
 
@@ -59,6 +59,20 @@ $bg-table :#e2e3e5;
         background-color: $bg-table;
     }
 }
+
+.noValidForm{
+    border: solid red 0.15rem !important;
+}
+
+.validForm{
+    border: solid green 0.15rem !important;    
+}
+
+.waitForFormValidate{
+    border: solid $bg-secondary 0.15rem;
+    border-radius: .25rem;
+};
+
 //CSS rule and Boostrap modifier END
 
 
@@ -78,7 +92,7 @@ $bg-table :#e2e3e5;
     //     display: block;
     // }
     .toggler .menu-icon .navbar-icon{
-        background-color: $bg-secodary;
+        background-color: $bg-secondary;
         display: block;
         height: 0.125rem;
         width: 1.300rem;
@@ -91,7 +105,7 @@ $bg-table :#e2e3e5;
         // content: "test";
 
         &:before {
-            background-color:$bg-secodary;
+            background-color:$bg-secondary;
             content: "";
             display: block;
             height: 100%;
@@ -102,7 +116,7 @@ $bg-table :#e2e3e5;
             top: 0.313rem;
         }
         &:after {
-            background-color:$bg-secodary;
+            background-color:$bg-secondary;
             content: "";
             display: block;
             height: 100%;

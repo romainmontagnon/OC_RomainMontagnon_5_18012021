@@ -102,48 +102,70 @@
                         </div>
                     </div>
                     <h3 class="text-dark my-3">Mes informations</h3>
-                    <div class="my-3">
-                        <div class="row">
+                    <form class="my-3" method="post" action="">
+                        <div class="row mt-2 mb-0">
                             <div class="col-4">
-                                <label for="emailAdress" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="emailAdress" placeholder="123@abc.io" aria-label="adresse email">
+                                <div class="form-check form-switch">
+                                    <input type="radio" class="form-check-input gender" id="madam" name="gender" value="Madame" checked aria-label="Madame ?">
+                                    <label for="madam" class="form-label">Madame</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input type="radio" class="form-check-input" id="sir" name="gender" value="Monsieur" aria-label="Monsieur ?">
+                                    <label for="sir" class="form-label">Monsieur</label>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4">
-                                <label for="firstName" class="col-sm-2 col-form-label">Pr&eacute;nom(s)</label>
-                                <input type="text" class="form-control" id="firstName" placeholder="John"  aria-label="prénoms">
+                                <label for="emailAdress" class="form-label">Email*</label>
+                                <input type="email" class="form-control" id="emailAdress" name="emailAdress" required placeholder="123@abc.io" aria-label="adresse email">
                             </div>
                             <div class="col-4">
-                                <label for="lastName" class="col-sm-2 col-form-label">Nom</label>
-                                <input type="text" class="form-control" id="lastName" placeholder="Doe" aria-label="nom">
+                                <label for="phone" class="col-sm-2 col-form-label">T&eacute;l&eacute;phone</label>
+                                <input type="text" class="form-control" id="phone" name="phone" placeholder="06 00 00 00 00" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" aria-label="numéro de téléphone">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="firstName" class="col-sm-2 col-form-label">Pr&eacute;nom(s)*</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName" required placeholder="John"  aria-label="prénoms">
+                            </div>
+                            <div class="col-4">
+                                <label for="lastName" class="col-sm-2 col-form-label">Nom*</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName" required placeholder="Doe" aria-label="nom">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-1">
                                 <label for="streetNumber" class="col-sm-2 col-form-label">Numero</label>
-                                <input type="text" class="form-control" id="streetNumber" placeholder="55"  aria-label="numero de rue">
+                                <input type="text" class="form-control" id="streetNumber" name="streetNumber" required placeholder="55" pattern="^[0-9]+$"aria-label="numero de rue">
                             </div>
                             <div class="col-7">
-                                <label for="streetName" class="col-sm-2 col-form-label">Rue</label>
-                                <input type="text" class="form-control" id="streetName" placeholder="Rue du Faubourg Saint-Honor&eacute;"  aria-label="nom de rue ou lieux-dit">
+                                <label for="streetName" class="col-sm-2 col-form-label">Rue*</label>
+                                <input type="text" class="form-control" id="streetName" name="streetName" required placeholder="Rue du Faubourg Saint-Honor&eacute;"  aria-label="nom de rue ou lieux-dit">
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-2">
-                                <label for="zipCode" class="col-sm-2 col-form-label">CP</label>
-                                <input type="text" class="form-control" id="zipCode" placeholder="75008"  aria-label="code postal">
+                                <label for="zipCode" class="col-sm-2 col-form-label">CP*</label>
+                                <input type="text" class="form-control" id="zipCode" name="zipCode" required placeholder="75008"  aria-label="code postal">
                             </div>
                             <div class="col-3">
-                                <label for="city" class="col-sm-2 col-form-label">Rue</label>
-                                <input type="text" class="form-control" id="city" placeholder="Paris"  aria-label="ville">
+                                <label for="city" class="col-sm-2 col-form-label">Rue*</label>
+                                <input type="text" class="form-control" id="city" name="city" required placeholder="Paris"  aria-label="ville">
                             </div>
                             <div class="col-3">
-                                <label for="country" class="col-sm-2 col-form-label">Pays</label>
-                                <input type="text" class="form-control" id="country" placeholder="France"  aria-label="pays">
+                                <label for="country" class="col-sm-2 col-form-label">Pays*</label>
+                                <input type="text" class="form-control" id="country" name="country" required placeholder="France"  value="France" aria-label="pays">
                             </div>
                         </div>
-                    </div>
+                        <div class="mt-1">
+                            <span class="waitForFormValidate" id="requiredForm">* : pour le bon déroulement de votre commande, ses champs sont obligatoires.</span>
+                        </div>
+                        <div class="my-3">
+                            <input type="submit" class="btn btn-dark" value="Valider mes informations" id="validationFormulaire" aria-label="Valider mes informations">
+                        </div>
+                    </form>
                     <div class="d-flex justify-content-end" id="cartPrice">
                         <div class="d-flex text-light px-3">
                                 <span class="btn-light rounded" id="writeCartPrice">
@@ -160,7 +182,7 @@
                             </a>
                         </div>
                         <div class="d-flex">
-                            <a href="http://www.rmfactory.eu/" class="nav-link active text-light" id="validationFormulaire">
+                            <a href="http://www.rmfactory.eu/" class="nav-link active text-light" id="validationAchat">
                                 <button type="button" class="btn btn-dark" aria-label="proceder au paiement">
                                     Paiement
                                 </button>

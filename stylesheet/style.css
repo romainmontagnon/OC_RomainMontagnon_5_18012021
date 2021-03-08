@@ -46,6 +46,19 @@
   background-color: #e2e3e5;
 }
 
+.noValidForm {
+  border: solid red 0.15rem !important;
+}
+
+.validForm {
+  border: solid green 0.15rem !important;
+}
+
+.waitForFormValidate {
+  border: solid #6d747c 0.15rem;
+  border-radius: .25rem;
+}
+
 .navbar-icon {
   display: none;
 }
