@@ -101,109 +101,116 @@
                           </div>
                         </div>
                     </div>
-                    <h3 class="text-dark my-3">Mes informations</h3>
-                    <form class="my-3" method="post" action="payment.html">
-                        <div class="row mt-2 mb-0">
-                            <div class="col-4">
-                                <div class="form-check form-switch">
-                                    <input type="radio" class="form-check-input gender" id="madam" name="gender" value="Madame" checked aria-label="Madame ?">
-                                    <label for="madam" class="form-label">Madame</label>
-                                </div>
-                                <div class="form-check form-switch">
-                                    <input type="radio" class="form-check-input" id="sir" name="gender" value="Monsieur" aria-label="Monsieur ?">
-                                    <label for="sir" class="form-label">Monsieur</label>
-                                </div>
+                </div>
+                <h3 class="text-dark my-3">Mes informations</h3>
+                <form class="my-3">
+                    <div class="row mt-2 mb-0">
+                        <div class="col-4">
+                            <div class="form-check form-switch">
+                                <input type="radio" class="form-check-input gender" id="madam" name="gender" value="Madame" checked aria-label="Madame ?">
+                                <label for="madam" class="form-label">Madame</label>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <label for="emailAdress" class="form-label">Email*</label>
-                                <input type="email" class="form-control" id="emailAdress" name="emailAdress" required placeholder="123@abc.io" aria-label="adresse email">
+                            <div class="form-check form-switch">
+                                <input type="radio" class="form-check-input" id="sir" name="gender" value="Monsieur" aria-label="Monsieur ?">
+                                <label for="sir" class="form-label">Monsieur</label>
                             </div>
-                            <div class="col-4">
-                                <label for="phone" class="col-sm-2 col-form-label">T&eacute;l&eacute;phone</label>
-                                <input type="text" class="form-control" id="phone" name="phone" placeholder="06 00 00 00 00" pattern="^((\+\d{1,3}(-| )?\(?\d\)?(-| )?\d{1,5})|(\(?\d{2,6}\)?))(-| )?(\d{3,4})(-| )?(\d{4})(( x| ext)\d{1,5}){0,1}$" aria-label="numéro de téléphone">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-4">
-                                <label for="firstName" class="col-sm-2 col-form-label">Pr&eacute;nom(s)*</label>
-                                <input type="text" class="form-control" id="firstName" name="firstName" required placeholder="John"  aria-label="prénoms">
-                            </div>
-                            <div class="col-4">
-                                <label for="lastName" class="col-sm-2 col-form-label">Nom*</label>
-                                <input type="text" class="form-control" id="lastName" name="lastName" required placeholder="Doe" aria-label="nom">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-1">
-                                <label for="streetNumber" class="col-sm-2 col-form-label">Numero</label>
-                                <input type="text" class="form-control" id="streetNumber" name="streetNumber" required placeholder="55" pattern="^[0-9]+$"aria-label="numero de rue">
-                            </div>
-                            <div class="col-7">
-                                <label for="streetName" class="col-sm-2 col-form-label">Rue*</label>
-                                <input type="text" class="form-control" id="streetName" name="streetName" required placeholder="Rue du Faubourg Saint-Honor&eacute;"  aria-label="nom de rue ou lieux-dit">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-2">
-                                <label for="zipCode" class="col-sm-2 col-form-label">CP*</label>
-                                <input type="text" class="form-control" id="zipCode" name="zipCode" required placeholder="75008"  aria-label="code postal">
-                            </div>
-                            <div class="col-3">
-                                <label for="city" class="col-sm-2 col-form-label">Rue*</label>
-                                <input type="text" class="form-control" id="city" name="city" required placeholder="Paris"  aria-label="ville">
-                            </div>
-                            <div class="col-3">
-                                <label for="country" class="col-sm-2 col-form-label">Pays*</label>
-                                <input type="text" class="form-control" id="country" name="country" required placeholder="France"  value="France" aria-label="pays">
-                            </div>
-                        </div>
-                        <h3 class="text-dark mt-5">Mes informations de paiement :</h3>
-                        <div class="row">
-                            <div class="col-3">
-                                <label for="cardName" class="col-form-label">Nom figurant sur la carte*</label>
-                                <input type="text" class="form-control" id="cardName" name="cardName" required placeholder="Doe"  aria-label="Nom figurant sur la carte">
-                            </div>
-                            <div class="col-2">
-                                <label for="cardCrypto" class="col-form-label">Cryptogramme*</label>
-                                <input type="text" class="form-control" id="cardCrypto" name="cardCrypto" required placeholder="123" pattern="^[0-9]{3}" aria-label="Cryptogramme de la carte">
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-3">
-                                <label for="cardNumber" class="col-form-label">Num&eacute;ro de la carte*</label>
-                                <input type="text" class="form-control" id="cardNumber" name="cardNumber" required placeholder="1234 5678 9010 1112" pattern="^[0-9]{16}" aria-label="Numéro de la carte">
-                            </div>
-                        </div>
-                        <div class="mt-1">
-                            <span class="waitForFormValidate" id="requiredForm">* : pour le bon déroulement de votre commande, ses champs sont obligatoires.</span>
-                        </div>
-                        <div class="my-3">
-                            <a href="http://www.rmfactory.eu/" class="nav-link active text-light" id="validationAchat"></a>
-                                <input type="submit" class="btn btn-dark" value="Valider mes informations et proc&eacute;der au paiement" id="validationFormulaire" aria-label="Valider mes informations et procéder au paiement">
-                            </a>
-                        </div>
-                    </form>
-                    <div class="d-flex justify-content-between" id="cartPrice">
-                        <div class="d-flex">
-                            <a href="shop.html" class="nav-link active text-light px-0">
-                                <button type="button"class="btn btn-dark">
-                                    Retour à la boutique
-                                </button>
-                            </a>
-                        </div>
-                        <div class="d-flex text-light px-3">
-                                <span class="btn-light rounded" id="writeCartPrice">
-                                test
-                                </span>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
-                            <h3 class="text-dark my-3">Les options de paiement</h3>
-                          <p></p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci expedita vero odit numquam quia, quibusdam commodi sequi quidem eos, doloremque facere accusantium harum qui. Error laudantium deleniti velit repellendus itaque?</p>
+                        <div class="col-4">
+                            <label for="emailAdress" class="form-label">Email*</label>
+                            <input type="email" class="form-control" id="emailAdress" name="emailAdress" required placeholder="123@abc.io" aria-label="adresse email">
                         </div>
+                        <div class="col-4">
+                            <label for="phone" class="col-sm-2 col-form-label">T&eacute;l&eacute;phone</label>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="06 00 00 00 00" aria-label="numéro de téléphone">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label for="firstName" class="col-sm-2 col-form-label">Pr&eacute;nom(s)*</label>
+                            <input type="text" class="form-control" id="firstName" name="firstName" required placeholder="John"  aria-label="prénoms">
+                        </div>
+                        <div class="col-4">
+                            <label for="lastName" class="col-sm-2 col-form-label">Nom*</label>
+                            <input type="text" class="form-control" id="lastName" name="lastName" required placeholder="Doe" aria-label="nom">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-1">
+                            <label for="streetNumber" class="col-sm-2 col-form-label">Numero</label>
+                            <input type="text" class="form-control px-1" id="streetNumber" name="streetNumber" required placeholder="55" aria-label="numero de rue">
+                        </div>
+                        <div class="col-7">
+                            <label for="streetName" class="col-sm-2 col-form-label">Rue*</label>
+                            <input type="text" class="form-control" id="streetName" name="streetName" required placeholder="Rue du Faubourg Saint-Honor&eacute;"  aria-label="nom de rue ou lieux-dit">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <label for="zipCode" class="col-sm-2 col-form-label">CP*</label>
+                            <input type="text" class="form-control" id="zipCode" name="zipCode" required placeholder="75008" aria-label="code postal">
+                        </div>
+                        <div class="col-3">
+                            <label for="city" class="col-sm-2 col-form-label">Ville*</label>
+                            <input type="text" class="form-control" id="city" name="city" required placeholder="Paris" aria-label="ville">
+                        </div>
+                        <div class="col-3">
+                            <label for="country" class="col-sm-2 col-form-label">Pays*</label>
+                            <input type="text" class="form-control" id="country" name="country" required placeholder="France" value="France" aria-label="pays">
+                        </div>
+                    </div>
+                    <h3 class="text-dark mt-5">Mes informations de paiement :</h3>
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="cardName" class="col-form-label">Nom figurant sur la carte*</label>
+                            <input type="text" class="form-control" id="cardName" name="cardName" required placeholder="Doe" aria-label="Nom figurant sur la carte">
+                        </div>
+                        <div class="col-2">
+                            <label for="cardCrypto" class="col-form-label">Cryptogramme*</label>
+                            <input type="text" class="form-control" id="cardCrypto" name="cardCrypto" required placeholder="123" aria-label="Cryptogramme de la carte">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <label for="cardNumber" class="col-form-label">Num&eacute;ro de la carte*</label>
+                            <input type="text" class="form-control" id="cardNumber" name="cardNumber" required placeholder="1234 5678 9010 1112" aria-label="Numéro de la carte">
+                        </div>
+                        <div class="col-2">
+                            <label for="cardDate" class="col-form-label">Validit&eacute;*</label>
+                            <input type="text" class="form-control" id="cardDate" name="cardDate" required placeholder="mm/aa" aria-label="Cryptogramme de la carte">
+                            <span class="fs-6">
+                                (mm/aa)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mt-1">
+                        <span class="waitForFormValidate" id="requiredForm">* : pour le bon déroulement de votre commande, ses champs sont obligatoires.</span>
+                    </div>
+                    <div class="my-3">
+                        <a href="http://www.rmfactory.eu/" class="nav-link active text-light" id="validationAchat"></a>
+                            <input type="submit" class="btn btn-dark" value="Valider mes informations et proc&eacute;der au paiement" id="validationFormulaire" aria-label="Valider mes informations et procéder au paiement">
+                        </a>
+                    </div>
+                </form>
+                <div class="d-flex justify-content-between" id="cartPrice">
+                    <div class="d-flex">
+                        <a href="shop.html" class="nav-link active text-light px-0">
+                            <button type="button"class="btn btn-dark">
+                                Retour à la boutique
+                            </button>
+                        </a>
+                    </div>
+                    <div class="d-flex text-light px-3">
+                            <span class="btn-light rounded" id="writeCartPrice">
+                            test
+                            </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <h3 class="text-dark my-3">Les options de paiement</h3>
+                        <p></p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci expedita vero odit numquam quia, quibusdam commodi sequi quidem eos, doloremque facere accusantium harum qui. Error laudantium deleniti velit repellendus itaque?</p>
                     </div>
                 </div>
             </section>
