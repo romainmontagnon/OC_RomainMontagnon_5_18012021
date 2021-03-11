@@ -152,12 +152,12 @@ const checkValidityTest = (array) => {
             array[i].classList.remove('noValidForm');
             requiredForm.classList.remove('noValidForm');
             paiementPossible = true;
-            return true;
+            return;
         } else if (!checkValidityTest) {
             requiredForm.classList.add('noValidForm');
             validationFormulaire.classList.remove('noValidForm');
             paiementPossible = false;
-            return false;
+            return;
         };
     };
 };
@@ -173,11 +173,12 @@ const validationFormulaireListener = () => {
             console.log('hello');
             //e.preventDefault();
             lireFormulaireClient();
-            if(!paiementPossible){
+            if (!paiementPossible){
                 e.preventDefault();
-                validationFormulaire.classList.add('noValidForm');
-                alert("N'oubliez pas de valider vos infos personnelles");
-            } else if(paiementPossible){
+                //validationFormulaire.classList.add('noValidForm');
+                alert("Votre formulaire est incomplet.");
+            } else if (paiementPossible){
+                console.log('Paiement Possible');
                 //redirectionJsToUrl ();
                 let url = 'http://localhost:3000/api/order';
                 console.log(url);
