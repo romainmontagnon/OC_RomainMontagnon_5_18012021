@@ -95,30 +95,12 @@ const storeToSessionStorage = (items, sessionStorageKey) =>{
 
 const lireFormulaireClient = () => {
     console.log(array);
-    /*
-    Si les champs ne sont pas validés, ils s'afficheront encadré en rouge
-    */
-    for (let i = 0; i < array.length; i++) {
-        let checkValidityTest = array[i].checkValidity(array[i]);
-        if (checkValidityTest){
-            console.log(array[i].value);
-            console.log(array[i].id);
-            array[i].classList.remove('noValidForm');
-            requiredForm.classList.remove('noValidForm');
-            array[i].classList.add('validForm');
-            array[i].classList.remove('noValidForm');
-            //contact.array[i].id = array[i].value;
-        } else if (!checkValidityTest) {
-            requiredForm.classList.add('noValidForm');
-            array[i].classList.add('noValidForm');
-            array[i].classList.remove('validForm');
-        };
-        console.log(checkValidityTest);
-    };
-
     let test = checkValidityTest(array);
-    if (test === true){
+    console.log(test);
+    if (test){
         console.log("formulaire ok, complétion de l'objet contact");
+        paiementPossible       = true;
+
         contact.gender         = gender.value;
         contact.emailAdress    = emailAdress.value;
         contact.phone          = phone.value;
@@ -135,31 +117,43 @@ const lireFormulaireClient = () => {
         contact.cardDate       = cardDate.value;
 
         storeToSessionStorage(contact, 'contact');
-    } else {
+    } else if (!test){
+        paiementPossible = false;
         return;
     };
     console.log(contact);
 };
 
 const checkValidityTest = (array) => {
+   /*
+   je crée un array dans lequel stocker les resultats des tests a chaque tour de boucle
+   a la fin de a boucle, j'utilise la method every qui fait appel a une foction anonyme
+   Si une des valeur du tableau est false, elle renvera false, si tout est true, elle renverra true.
+   */
+   let bool = new Array();
     /*
-    si n'importe lequel des champs n'est pas valide, on excute ce code qui permet d'encadrer en rouge la :
-    "* : pour le bon déroulement de votre commande, ses champs sont obligatoires."
+    Si les champs ne sont pas validés, ils s'afficheront encadré en rouge
     */
     for (let i = 0; i < array.length; i++) {
-        let checkValidityTest = array[i].checkValidity(array[i])
-        if (checkValidityTest){
+        let test = array[i].checkValidity(array[i]);
+        if (test){
+            console.log(array[i].value);
+            console.log(array[i].id);
             array[i].classList.remove('noValidForm');
             requiredForm.classList.remove('noValidForm');
-            paiementPossible = true;
-            return;
-        } else if (!checkValidityTest) {
+            array[i].classList.add('validForm');
+            array[i].classList.remove('noValidForm');
+            bool.push(true);
+        } else if (!test) {
             requiredForm.classList.add('noValidForm');
-            validationFormulaire.classList.remove('noValidForm');
-            paiementPossible = false;
-            return;
+            array[i].classList.add('noValidForm');
+            array[i].classList.remove('validForm');
+            bool.push(false);
         };
+        console.log(test);
     };
+    console.log(bool);
+    return (bool.every(elem => elem === true));
 };
 
 const validationFormulaireListener = () => {
@@ -178,8 +172,26 @@ const validationFormulaireListener = () => {
                 //validationFormulaire.classList.add('noValidForm');
                 alert("Votre formulaire est incomplet.");
             } else if (paiementPossible){
+                //requete vers API pour donner les infos sur le client et le détail de la commande.
+
+                fetch("http://localhost:3000/api/order",{
+                    method: 'PUT',
+                    body: JSON.stringify(contact),
+                    headers: {'Content-type': 'application/json; charset=UTF-8',},
+                })
+                .then((response) => response.json())
+                .then((json) => console.log(json))
+                .catch(error => console.log('error', error))
+                .catch(e.preventDefault());
+
+                //si la requete est ok
+                //redirectionJsToUrl ('../html/payment.html');
+
+                //sinon afficher page avec code erreur 
+
+
                 console.log('Paiement Possible');
-                //redirectionJsToUrl ();
+                
                 let url = 'http://localhost:3000/api/order';
                 console.log(url);
                 let contactToString = JSON.stringify(contact);
@@ -200,8 +212,8 @@ const validationFormulaireListener = () => {
     };
 };
 
-const redirectionJsToUrl = () => {
-  document.location.href="../html/payment.html"; 
+const redirectionJsToUrl = (url) => {
+  document.location.href=url; 
 };
 
 document.onload = validationFormulaireListener();
