@@ -5,9 +5,9 @@ const updateRegexCardDate = () =>{
     return '^([0-9][1-2]\/['+a+'-9]['+b+'-9])$';
 };
 
-let contact = {
+let contactInfo = {
     gender          : '',
-    emailAdress     : '',
+    email           : '',
     phone           : '',
     firstName       : '',
     lastName        : '',
@@ -42,7 +42,7 @@ let cardDate        = document.getElementById('cardDate');
 let requiredForm    = document.getElementById('requiredForm');
 
 let array = [
-    emailAdress     = emailAdress,
+    email           = emailAdress,
     phone           = phone,
     firstName       = firstName,
     lastName        = lastName,
@@ -101,27 +101,27 @@ const lireFormulaireClient = () => {
         console.log("formulaire ok, complétion de l'objet contact");
         paiementPossible       = true;
 
-        contact.gender         = gender.value;
-        contact.emailAdress    = emailAdress.value;
-        contact.phone          = phone.value;
-        contact.firstName      = firstName.value;
-        contact.lastName       = lastName.value;
-        contact.streetNumber   = streetNumber.value;
-        contact.streetName     = streetName.value;
-        contact.zipCode        = zipCode.value;
-        contact.city           = city.value;
-        contact.country        = country.value;
-        contact.cardName       = cardName.value;
-        contact.cardCrypto     = cardCrypto.value;
-        contact.cardNumber     = cardNumber.value;
-        contact.cardDate       = cardDate.value;
+        contactInfo.gender         = gender.value;
+        contactInfo.email          = emailAdress.value;
+        contactInfo.phone          = phone.value;
+        contactInfo.firstName      = firstName.value;
+        contactInfo.lastName       = lastName.value;
+        contactInfo.streetNumber   = streetNumber.value;
+        contactInfo.streetName     = streetName.value;
+        contactInfo.zipCode        = zipCode.value;
+        contactInfo.city           = city.value;
+        contactInfo.country        = country.value;
+        contactInfo.cardName       = cardName.value;
+        contactInfo.cardCrypto     = cardCrypto.value;
+        contactInfo.cardNumber     = cardNumber.value;
+        contactInfo.cardDate       = cardDate.value;
 
-        storeToSessionStorage(contact, 'contact');
+        storeToSessionStorage(contactInfo, 'contactInfo');
     } else if (!test){
         paiementPossible = false;
         return;
     };
-    console.log(contact);
+    console.log(contactInfo);
 };
 
 const checkValidityTest = (array) => {
@@ -172,41 +172,88 @@ const validationFormulaireListener = () => {
                 //validationFormulaire.classList.add('noValidForm');
                 alert("Votre formulaire est incomplet.");
             } else if (paiementPossible){
+                //Formatage des données pour l'api :
+
+                /*
+                Les variabbles pour l'API :
+                    !req.body.contact ||
+                    !req.body.contact.firstName ||
+                    !req.body.contact.lastName ||
+                    !req.body.contact.address ||
+                    !req.body.contact.city ||
+                    !req.body.contact.email ||
+                    !req.body.products
+                /*
+                Le tableau de produits envoyé au serveur doit être un tableau de strings
+                intitulé products qui contiendra les id des produits à commander.
+                */
+                let products = new Array();
+                for (let i = 0; i < cartItemsArray.length; i++) {
+                    products.push(cartItemsArray[i]._id);
+                };
+                console.log(products);
+                /*
+                Pour les routes POST, l'objet “contact” envoyé au serveur doit contenir les champs :
+                prénom, nom, adresse, ville et adresse électronique. Tous les champs sont obligatoires.
+                */
+            //    let contact              = new Array ();
+            //        contact.firstName    = contactInfo.firstName;
+            //        contact.lastName     = contactInfo.lastName;
+            //        contact.address      = contactInfo.streetNumber+' '+contactInfo.streetName;
+            //        contact.city         = contactInfo.city;
+            //        contact.email        = contactInfo.email;
+
+                // contact = [
+                // contact.firstName   = contactInfo.firstName,
+                // contact.lastName    = contactInfo.lastName,
+                // contact.address     = contactInfo.streetName,
+                // contact.city        = contactInfo.city,
+                // contact.email       = contactInfo.email
+                // ];
+
+                let contact = {
+                    firstName   : contactInfo.firstName,
+                    lastName    : contactInfo.lastName,
+                    address     : contactInfo.streetName,
+                    city        : contactInfo.city,
+                    email       : contactInfo.email
+                };
+
+                //let data = contact.concat(products);
+                let contactToString = JSON.stringify(contact);
+                console.log(contactToString);
+                let productsToString = JSON.stringify(products);
+                console.log(productsToString);
+                let data = contactToString+productsToString;
+                console.log(data);
                 //requete vers API pour donner les infos sur le client et le détail de la commande.
 
-                fetch("http://localhost:3000/api/order",{
-                    method: 'PUT',
-                    body: JSON.stringify(contact),
-                    headers: {'Content-type': 'application/json; charset=UTF-8',},
+                let urlTest = 'https://jsonplaceholder.typicode.com/posts';
+                let url = 'http://localhost:3000/api/cameras/order';
+                let retour = [];
+                fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    },
+                    body: JSON.stringify({
+                        contact: contact,
+                        products: products
+                    }),
                 })
                 .then((response) => response.json())
                 .then((json) => console.log(json))
+                .then(e.preventDefault())
+                // .then(redirectionJsToUrl('../html/payment.html'))
                 .catch(error => console.log('error', error))
                 .catch(e.preventDefault());
-
+                ;
                 //si la requete est ok
                 //redirectionJsToUrl ('../html/payment.html');
-
+                
                 //sinon afficher page avec code erreur 
 
-
                 console.log('Paiement Possible');
-                
-                let url = 'http://localhost:3000/api/order';
-                console.log(url);
-                let contactToString = JSON.stringify(contact);
-                console.log(contactToString);
-                let arrayCartItemsCallback = localStorage.getItem('arrayCartItems');
-                console.log(arrayCartItemsCallback);
-
-                //fetch("http://localhost:3000/api/order",{
-                //     method: 'PUT',
-                //     body: JSON.stringify(contact),
-                //     headers: {'Content-type': 'application/json; charset=UTF-8',},
-                // })
-                // .then((response) => response.json())
-                // .then((json) => console.log(json))
-                // .catch(error => console.log('error', error));
             };
         });
     };
@@ -219,3 +266,51 @@ const redirectionJsToUrl = (url) => {
 document.onload = validationFormulaireListener();
 document.onload = regexFormPattern();
 document.onload = updateRegexCardDate();
+
+
+
+const essai = () => {
+    console.log('essai');
+    let products = new Array();
+    for (let i = 0; i < cartItemsArray.length; i++) {
+        products.push(cartItemsArray[i]._id);
+    };
+    console.log(products);
+
+    let contact = {
+        firstName   : 'John',
+        lastName    : 'Doe',
+        address     : '55'+'rue Montaigne',
+        city        : 'Paris',
+        email       : '123@abc.com'
+    };
+    console.log(contact);
+
+    let contactToString = JSON.stringify(contact);
+    console.log(contactToString);
+    let productsToString = JSON.stringify(products);
+    console.log(productsToString);
+    let data = contactToString+productsToString;
+
+    console.log(data);
+    let urlTest = 'https://jsonplaceholder.typicode.com/posts';
+    let url = 'http://localhost:3000/api/cameras/order';
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8'
+        },
+        body: JSON.stringify({
+            // title: 'foo',
+            // body: 'bar',
+            // userId: 1,
+            contact: contact,
+            products: products
+         }),
+    })
+    .then((response) => response.json())
+    .then((json) => console.log(json))
+    .catch(error => console.log('error', error))
+    ;
+};
