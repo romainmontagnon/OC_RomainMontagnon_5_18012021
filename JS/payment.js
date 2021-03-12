@@ -242,18 +242,18 @@ const validationFormulaireListener = () => {
                     }),
                 })
                 .then((response) => response.json())
-                .then((json) => console.log(json))
-                .then(e.preventDefault())
-                // .then(redirectionJsToUrl('../html/payment.html'))
+                .then(
+                    function(json){
+                        console.log(json.orderId);
+                        //1) recup ID
+                        let id = json.orderId;
+                        //2) page suivante
+                        redirectionJsToUrl('../html/payment.html?id='+id);
+                    }
+                )
                 .catch(error => console.log('error', error))
                 .catch(e.preventDefault());
                 ;
-                //si la requete est ok
-                //redirectionJsToUrl ('../html/payment.html');
-                
-                //sinon afficher page avec code erreur 
-
-                console.log('Paiement Possible');
             };
         });
     };
@@ -266,51 +266,3 @@ const redirectionJsToUrl = (url) => {
 document.onload = validationFormulaireListener();
 document.onload = regexFormPattern();
 document.onload = updateRegexCardDate();
-
-
-
-const essai = () => {
-    console.log('essai');
-    let products = new Array();
-    for (let i = 0; i < cartItemsArray.length; i++) {
-        products.push(cartItemsArray[i]._id);
-    };
-    console.log(products);
-
-    let contact = {
-        firstName   : 'John',
-        lastName    : 'Doe',
-        address     : '55'+'rue Montaigne',
-        city        : 'Paris',
-        email       : '123@abc.com'
-    };
-    console.log(contact);
-
-    let contactToString = JSON.stringify(contact);
-    console.log(contactToString);
-    let productsToString = JSON.stringify(products);
-    console.log(productsToString);
-    let data = contactToString+productsToString;
-
-    console.log(data);
-    let urlTest = 'https://jsonplaceholder.typicode.com/posts';
-    let url = 'http://localhost:3000/api/cameras/order';
-
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json; charset=UTF-8'
-        },
-        body: JSON.stringify({
-            // title: 'foo',
-            // body: 'bar',
-            // userId: 1,
-            contact: contact,
-            products: products
-         }),
-    })
-    .then((response) => response.json())
-    .then((json) => console.log(json))
-    .catch(error => console.log('error', error))
-    ;
-};
