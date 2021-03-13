@@ -1,12 +1,12 @@
 let cartItemsArray = new Array();
 
 let cameraCartObject = {
-    name : '',
-    _id : '',
-    itemOption : '',
-    price : '',
-    imageUrl : '',
-    quantity : ''
+    name        : '',
+    _id         : '',
+    itemOption  : '',
+    price       : '',
+    imageUrl    : '',
+    quantity    : ''
 };
 
 const addToCart = () => {
@@ -24,13 +24,12 @@ const addToCart = () => {
 const localStorageResume = () => {
     //Cart Resume
     let arrayCartItemsCallback = localStorage.getItem('arrayCartItems');
-    // console.table(arrayCartItemsCallback);
     if (arrayCartItemsCallback === null){
         return;
     } else {
         arrayCartItemsCallback = JSON.parse(arrayCartItemsCallback, cameraCartObject);
-        resumeCartItems (Array.from(arrayCartItemsCallback));   //Cart Items Resume
-        numberOfCartItems (Array.from(arrayCartItemsCallback));//Number of cart items Resume
+        resumeCartItems (Array.from(arrayCartItemsCallback));
+        numberOfCartItems (Array.from(arrayCartItemsCallback));
     };
     return;
 };
@@ -48,12 +47,12 @@ const resumeCartItems = (arrayOfItems) => {
         for (let i = 0; i < arrayOfItems.length; i++){
             console.table(arrayOfItems[i]);
             let object = {
-                name : arrayOfItems[i].name,
-                _id : arrayOfItems[i]._id,
-                itemOption : arrayOfItems[i].itemOption,
-                price : arrayOfItems[i].price,
-                imageUrl : arrayOfItems[i].imageUrl,
-                quantity : arrayOfItems[i].quantity
+                name        : arrayOfItems[i].name,
+                _id         : arrayOfItems[i]._id,
+                itemOption  : arrayOfItems[i].itemOption,
+                price       : arrayOfItems[i].price,
+                imageUrl    : arrayOfItems[i].imageUrl,
+                quantity    : arrayOfItems[i].quantity
             };
             cartItemsArray.push(object);
             console.table(arrayOfItems);
@@ -88,31 +87,16 @@ const clearCartDiv = () =>{
     document.getElementById('showCartItems').innerHTML=" ";    
 };
 
-const supprCartItem = () =>{
-    //fonction a developper
-    let supprCartItem = document.querySelectorAll('.cartItemId');
-    // console.log(supprCartItem);
-    supprCartItem.forEach(event => {
-        console.log(event);
-        // event.addEventListener('clic', e=>{
-        //     console.log(e);
-        // });
-        
-    });
-};
-
 const cartPrice = () => {
     let writeCartPrice = document.getElementById('writeCartPrice');
     let writeCartPriceDropdown = document.getElementById('writeCartPriceDropdown');
 
     let calcul = 0;
     for (let i= 0; i< cartItemsArray.length; i++){
-        let price = cartItemsArray[i].price;
+        let price    = cartItemsArray[i].price;
         let quantity = cartItemsArray[i].quantity;
         calcul += (price*quantity);
-        console.log(price, quantity, calcul);           
     };
-
     writeCartPriceDropdown.textContent='TOTAL : '+calcul+'€';
     if (writeCartPrice == null){
         return;
@@ -128,12 +112,11 @@ const showNumberOfCartItems = (numberOfItems) => {
 const showCartItems = (myArray) =>{
     console.table(myArray);
     if (myArray == ''){
-        console.log('la panier est vide');
+        console.log('le panier est vide');
         showEmptyCart('showCartItems');
     } else {
         clearCartDiv();
         for (let i = 0; i < myArray.length; i++) {
-            console.log(myArray[i]);
             let tr = document.createElement('tr');
             let html = ``;
             html = `<tr>
@@ -166,22 +149,21 @@ const showCartDetails = () =>{
         cartPrice();
     } else {
         for (let i = 0; i < items.length; i++) {
-            console.log(items[i].quantity);
-            let tr = document.createElement('tr');
-        let html = ``;
-            html = `
-                    <td>${items[i].name} toto</td>
-                    <td>${items[i].itemOption}</td>
-                    <td>
-                        <input type="number" value=${items[i].quantity} min=1 max=10 class="form-control" id="inputCartQuantity">
-                    </td>
-                    <td>${items[i].price}€</td>
-                    <td>
-                        <button type="button" class="cartItemId btn btn-outline-dark" aria-label="supprimer du panier">
-                            <i class="far fa-trash-alt"></i>
-                        </button>
-                    </td>`;
-                htmlToTr(tr, html,'showCartDetails');
+            let tr      = document.createElement('tr');
+            let html    = ``;
+                html    = `
+                            <td>${items[i].name} toto</td>
+                            <td>${items[i].itemOption}</td>
+                            <td>
+                                <input type="number" value=${items[i].quantity} min=1 max=10 class="form-control" id="inputCartQuantity">
+                            </td>
+                            <td>${items[i].price}€</td>
+                            <td>
+                                <button type="button" class="cartItemId btn btn-outline-dark" aria-label="supprimer du panier">
+                                    <i class="far fa-trash-alt"></i>
+                                </button>
+                            </td>`;
+            htmlToTr(tr, html,'showCartDetails');
         };
         cartPrice();
     };
@@ -189,14 +171,14 @@ const showCartDetails = () =>{
 };
 
 const showEmptyCart = (divId) => {
-    let tr = document.createElement('tr');
+    let tr   = document.createElement('tr');
     let html = ``;
         html = `
-                <td>Votre panier est vide</td>
-                <td>Votre panier est vide</td>
-                <td>Votre panier est vide</td>
-                <td>Votre panier est vide</td>
-                <td>Votre panier est vide</td>
+            <td>Votre panier est vide</td>
+            <td>Votre panier est vide</td>
+            <td>Votre panier est vide</td>
+            <td>Votre panier est vide</td>
+            <td>Votre panier est vide</td>
         `;
     htmlToTr(tr, html,divId);
 };

@@ -12,10 +12,8 @@ const showProductDetailFetch = () => {
     if (itemID === null){
         return;
     } else {
-        console.log(itemID);
         let hostAdress = 'http://localhost:3000/api/cameras/';
         let url = hostAdress+itemID;
-        console.log(url);
 
         fetch(url)
             .then(function (response){
@@ -114,9 +112,8 @@ const readOrderId = () =>{
     if (orderId === null){
         return;
     } else {
-        console.log(orderId);
+        // console.log(orderId);
         displayOrderId = document.getElementById('orderId');
-        console.log(displayOrderId);
         displayOrderId.textContent += orderId;
         clearCart();
         sessionStorage.clear();
@@ -130,13 +127,13 @@ const onLoadFunctionCall = ()=>{
     let finalOrderPage  = url.search('payment.html');
 
     if (pageShop != -1){
-        console.log('page Boutique');
+        // console.log('page Boutique');
         showProductsFetch();
     } else if (pageShopProduct != -1){
-        console.log('page Details Produit');
+        // console.log('page Details Produit');
         showProductDetailFetch();
     } else if (finalOrderPage != -1){
-        console.log('page de fin de commande');
+        // console.log('page de fin de commande');
         readOrderId();
     } else {
         return;
