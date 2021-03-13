@@ -1,6 +1,6 @@
 const updateRegexCardDate = () =>{
     let year = (new Date()).getFullYear().toString();
-    let a = year.substring(2,3);    console.log(a);
+    let a = year.substring(2,3);
     let b = year.substring(3,4);
     return '^([0-9][1-2]\/['+a+'-9]['+b+'-9])$';
 };
@@ -88,15 +88,12 @@ const regexFormPattern = () => {
 };
 
 const storeToSessionStorage = (items, sessionStorageKey) =>{
-    // console.table(items)
     let jsToString = JSON.stringify(items, sessionStorageKey);
     sessionStorage.setItem(sessionStorageKey, jsToString);
 };
 
 const lireFormulaireClient = () => {
-    console.log(array);
     let test = checkValidityTest(array);
-    console.log(test);
     if (test){
         console.log("formulaire ok, complétion de l'objet contact");
         paiementPossible       = true;
@@ -121,7 +118,6 @@ const lireFormulaireClient = () => {
         paiementPossible = false;
         return;
     };
-    console.log(contactInfo);
 };
 
 const checkValidityTest = (array) => {
@@ -137,8 +133,6 @@ const checkValidityTest = (array) => {
     for (let i = 0; i < array.length; i++) {
         let test = array[i].checkValidity(array[i]);
         if (test){
-            console.log(array[i].value);
-            console.log(array[i].id);
             array[i].classList.remove('noValidForm');
             requiredForm.classList.remove('noValidForm');
             array[i].classList.add('validForm');
@@ -150,26 +144,19 @@ const checkValidityTest = (array) => {
             array[i].classList.remove('validForm');
             bool.push(false);
         };
-        console.log(test);
     };
-    console.log(bool);
     return (bool.every(elem => elem === true));
 };
 
 const validationFormulaireListener = () => {
-    console.log('je suis loader')
     let validationFormulaire = document.getElementById('validationFormulaire');
-    console.log(validationFormulaire);
     if (validationFormulaire == null){
         return;
     } else {
         validationFormulaire.addEventListener('click', e=>{
-            console.log('hello');
-            //e.preventDefault();
             lireFormulaireClient();
             if (!paiementPossible){
                 e.preventDefault();
-                //validationFormulaire.classList.add('noValidForm');
                 alert("Votre formulaire est incomplet.");
             } else if (paiementPossible){
                 //Formatage des données pour l'api :
@@ -191,26 +178,10 @@ const validationFormulaireListener = () => {
                 for (let i = 0; i < cartItemsArray.length; i++) {
                     products.push(cartItemsArray[i]._id);
                 };
-                console.log(products);
                 /*
                 Pour les routes POST, l'objet “contact” envoyé au serveur doit contenir les champs :
                 prénom, nom, adresse, ville et adresse électronique. Tous les champs sont obligatoires.
                 */
-            //    let contact              = new Array ();
-            //        contact.firstName    = contactInfo.firstName;
-            //        contact.lastName     = contactInfo.lastName;
-            //        contact.address      = contactInfo.streetNumber+' '+contactInfo.streetName;
-            //        contact.city         = contactInfo.city;
-            //        contact.email        = contactInfo.email;
-
-                // contact = [
-                // contact.firstName   = contactInfo.firstName,
-                // contact.lastName    = contactInfo.lastName,
-                // contact.address     = contactInfo.streetName,
-                // contact.city        = contactInfo.city,
-                // contact.email       = contactInfo.email
-                // ];
-
                 let contact = {
                     firstName   : contactInfo.firstName,
                     lastName    : contactInfo.lastName,
@@ -219,18 +190,12 @@ const validationFormulaireListener = () => {
                     email       : contactInfo.email
                 };
 
-                //let data = contact.concat(products);
                 let contactToString = JSON.stringify(contact);
-                console.log(contactToString);
                 let productsToString = JSON.stringify(products);
-                console.log(productsToString);
                 let data = contactToString+productsToString;
-                console.log(data);
                 //requete vers API pour donner les infos sur le client et le détail de la commande.
 
-                let urlTest = 'https://jsonplaceholder.typicode.com/posts';
                 let url = 'http://localhost:3000/api/cameras/order';
-                let retour = [];
                 fetch(url, {
                     method: 'POST',
                     headers: {

@@ -1,26 +1,13 @@
 const showResult = (items) => {
     for (let i = 0; i < items.length; i++){
-        const showResult = (items) =>{
-            for (let i = 0; i < items.length; i++){
-                // console.log(items[i].name);
-                // console.table(items[i]);
-                let li = createLi(items[i]);
-                // console.log(li);
-                //document.getElementById('myList').appendChild(li);
-                //affichage(items[i]);
-            };
-        };
         let li = createLi(items[i]);
     };
 };
 
 const showProductDetailFetch = () => {
     let paramString=window.location.href;
-    // console.log(paramString);
     let searchParams = new URL(paramString).searchParams;
-    // console.log(searchParams.get('id'));
 
-    // console.log('showProductDetailFetch()');
     let itemID = searchParams.get('id');
     if (itemID === null){
         return;
@@ -37,14 +24,11 @@ const showProductDetailFetch = () => {
             .then(function (result){
                 console.table(result);
                 productPageDetails(result);
-                //showProductDetailFetch(result);
             });
     };
-
 };
 
 const productPageDetails = (e) =>{
-    // console.log(e);
     let div = document.createElement('div');
     let html =  `
                 <div id="carouselLanding" class="carousel slide position-relative" data-bs-ride="carousel">
@@ -101,8 +85,6 @@ const createLi = (item) =>{
                     </div>
                 </div>`;
     li.innerHTML = html;
-    // console.log(li);
-    // console.log(item.imageUrl);
     let myList = document.getElementById('myList');
     if (myList === null){
         return;
@@ -124,69 +106,41 @@ const showProductsFetch = () =>{
         });
 };
 
+const readOrderId = () =>{
+    let paramString=window.location.href;
+    let searchParams = new URL(paramString).searchParams;
+
+    let orderId = searchParams.get('id');
+    if (orderId === null){
+        return;
+    } else {
+        console.log(orderId);
+        displayOrderId = document.getElementById('orderId');
+        console.log(displayOrderId);
+        displayOrderId.textContent += orderId;
+        clearCart();
+        sessionStorage.clear();
+    };
+}
+
 const onLoadFunctionCall = ()=>{
-    let url = window.location.href;
-    // console.log(url);
-    let pageShop = url.search('shop.html');
+    let url             = window.location.href;
+    let pageShop        = url.search('shop.html');
     let pageShopProduct = url.search('shop_product.html')
-    // console.log(pageShop);
-    // console.log(pageShopProduct);
+    let finalOrderPage  = url.search('payment.html');
+
     if (pageShop != -1){
         console.log('page Boutique');
         showProductsFetch();
     } else if (pageShopProduct != -1){
         console.log('page Details Produit');
         showProductDetailFetch();
+    } else if (finalOrderPage != -1){
+        console.log('page de fin de commande');
+        readOrderId();
     } else {
         return;
     };
 };
 
 document.onload = onLoadFunctionCall ();
-
-// const productFetchRequest = () =>{
-//     //console.log('Lancement de la requete FETCH');
-//     fetch("http://localhost:3000/api/cameras")
-//         .then(function (response){
-//             return  response.json();
-//         })
-//         .then(function (result){
-//             console.table(result);
-//             showProductDetailFetch(result);
-//         });
-// };
-
-// const productFetchRequest = () =>{
-//     showProductDetailFetch();
-//     console.log('Lancement de la requete FETCH');
-//     fetch("http://localhost:3000/api/cameras/5be1ed3f1c9d44000030b061")
-//         .then(function (response){
-//             return  response.json();
-//         })
-//         .then(function (result){
-//             console.table(result);
-//             showProductDetailFetch(result);
-//         });
-// };
-
-
-// const showProductDetailFetch = (items) => {
-//     let paramString=window.location.href;
-//     // console.log(paramString);
-//     let searchParams = new URL(paramString).searchParams;
-//     // console.log(searchParams.get('id'));
-
-//     // console.log('showProductDetailFetch()');
-//     let itemID = searchParams.get('id');
-//     //console.log(itemID);
-//     for (let i = 0; i < items.length; i++){
-//         let itemsID = (items[i]._id);
-//         // console.log(itemsID);
-//         if(itemID===itemsID){
-//             // console.warn(itemID);
-//             productPageDetails(items[i]);
-//         } else {
-//             // console.error(itemsID);
-//         };
-//     };
-// };

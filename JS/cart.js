@@ -29,17 +29,13 @@ const localStorageResume = () => {
         return;
     } else {
         arrayCartItemsCallback = JSON.parse(arrayCartItemsCallback, cameraCartObject);
-        // console.table(arrayCartItemsCallback);
         resumeCartItems (Array.from(arrayCartItemsCallback));   //Cart Items Resume
         numberOfCartItems (Array.from(arrayCartItemsCallback));//Number of cart items Resume
-        //cartPrice();
-
     };
     return;
 };
 
 const storeToLocalStorage = (items) =>{
-    // console.table(items)
     let jsToString = JSON.stringify(items, cameraCartObject);
     localStorage.setItem('arrayCartItems', jsToString);
 };
@@ -69,10 +65,8 @@ const resumeCartItems = (arrayOfItems) => {
 const numberOfCartItems = (arrayOfItems) => {
     let quantity = 0;
     for (let i = 0; i < arrayOfItems.length; i++) {
-        // console.table(arrayOfItems[i].quantity);
         let base=10;
         quantity += parseInt(arrayOfItems[i].quantity, base);
-        // console.log (quantity);
     };
     showNumberOfCartItems (quantity);
     return (quantity);
@@ -85,7 +79,6 @@ const clearCart = () => {
 
     cartItemsParsed = 0;
     localStorage.setItem('arrayCartItems', jsToString);
-    //localStorage.setItem('cartItems', cartItemsParsed);
     showNumberOfCartItems(cartItemsParsed);
     clearCartDiv();
     return;
@@ -96,6 +89,7 @@ const clearCartDiv = () =>{
 };
 
 const supprCartItem = () =>{
+    //fonction a developper
     let supprCartItem = document.querySelectorAll('.cartItemId');
     // console.log(supprCartItem);
     supprCartItem.forEach(event => {
@@ -160,7 +154,6 @@ const showCartItems = (myArray) =>{
 
     numberOfCartItems(myArray);
     storeToLocalStorage(myArray);
-    //supprCartItem();
     return;
 };
 
@@ -192,7 +185,6 @@ const showCartDetails = () =>{
         };
         cartPrice();
     };
-    //htmlToTr(tr, html,'showCartDetails');
     return;
 };
 
@@ -220,7 +212,7 @@ const htmlToTr = (tr, html,divId) =>{
 };
 
 const readItemInfo = () =>{
-    let itemInfo = document.getElementById('itemInfo');
+    let itemInfo        = document.getElementById('itemInfo');
     let itemName        = itemInfo.textContent;
     let itemId          = itemInfo.dataset.itemId;
     let itemOption      = document.querySelector("input[name='lense']:checked").dataset.lenseId;
@@ -229,22 +221,16 @@ const readItemInfo = () =>{
     let itemQuantity    = document.getElementById('inputQuantity').value;
     
     let object = {
-        name : itemName,
-        _id : itemId,
-        itemOption : itemOption,
-        price : itemPrice,
-        imageUrl : itemImageUrl,
-        quantity : itemQuantity
+        name        : itemName,
+        _id         : itemId,
+        itemOption  : itemOption,
+        price       : itemPrice,
+        imageUrl    : itemImageUrl,
+        quantity    : itemQuantity
     };
   
     cartItemsArray.push(object);
     showCartItems(cartItemsArray);
-    // numberOfCartItems(cartItemsArray);
-
-    
-
-    // console.table(object);
-    // console.table(cartItemsArray);
 };
 
 const clearCartPageListener = () => {
@@ -283,127 +269,3 @@ document.onload = cartValidationPageListener();
 document.getElementById('clear-cart').addEventListener('click', e=>{
     clearCart();
 });
-// document.getElementById('addToCart').addEventListener('click', e=> {
-//     readItemInfo ();
-// });
-
-
-
-
-// const addToCart = () =>{
-//     document.getElementById('addToCart').addEventListener('click', e=> {
-//         e.stopImmediatePropagation();
-//         readItemInfo ();
-//     });
-// };
-
-// document.getElementById('cart-plus-one').addEventListener('click', e=>{
-//     // console.log("+1");
-//     addOneToCart();
-// });
-// document.getElementById('cart-minus-one').addEventListener('click', e=>{
-//     // console.log("-1");
-//     minusOneToCart();
-// });
-
-// const objectToArray = (object) => {
-// console.log(Array.from(object));
-// let array = Array.from(object);
-// console.table(array);
-// showCartItems (array);
-// };
-
-// const addOneToCart = () => {
-//     // console.log("appel fonction +");
-//     let cartItems = localStorage.getItem('cartItems');
-//     cartItems++;
-//     if (cartItems <= 0){
-//         cartItems=0;
-//     }
-//     localStorage.setItem('cartItems', cartItems);
-//     showNumberOfCartItems(cartItems);
-// };
-
-// const minusOneToCart = () => {
-//     // console.log("appel fonction +");
-//     let cartItems = localStorage.getItem('cartItems');
-//     cartItems--;
-//     if (cartItems <= 0){
-//         cartItems=0;
-//     }
-//     localStorage.setItem('cartItems', cartItems);
-//     showNumberOfCartItems(cartItems);
-// };
-
-// const readItemInfo = (value) =>{
-//     //let itemOption = document.getElementsByClassName('item-option');
-//     let itemOption = readItemOption();
-//     // let inputQuantity = document.getElementById('inputQuantity');
-//     let inputQuantity = readQuantity();
-//     console.log(inputQuantity.value);
-//     for (let i = 0; i < itemOption.length; i++){
-//         if (itemOption[i].checked==true) {
-//             console.warn(itemOption[i].dataset);
-//             fetch("http://localhost:3000/api/cameras")
-//                 .then(function (response){
-//                     return  response.json();
-//                 })
-//                 .then(function (result){
-//                     console.table(result);
-//                     //let inputQuantity = readQuantity();
-//                     createItemForCart(itemOption[i].dataset.itemId, itemOption[i].dataset.lenseId, inputQuantity.value, result);
-//                 });            
-//         };  
-//     };
-// };
-
-
-// const createItemForCart = (itemId, itemOption, quantity, data) => {
-//     //console.log(itemId, itemOption, quantity, data);
-//     for (let i = 0; i < data.length; i++) {
-//         if(data[i]._id===itemId){
-//             console.log("matching ID");
-//             console.log(data[i]);
-//             let item = {
-//                     name : data[i].name,
-//                     _id : data[i]._id,
-//                     itemOption : itemOption,
-//                     price : data[i].price,
-//                     imageUrl : data[i].imageUrl,
-//                     quantity : quantity
-//                 };
-//             console.table(item);
-//             console.log(typeof(item));
-//             arrayCartItems (item);
-//         };
-        
-//     };
-// };
-
-
-// const readItemOption = () =>{
-//     let itemOption = document.getElementsByClassName('item-option');
-//     return itemOption;
-// };
-
-
-// const readQuantity = () =>{
-//         let inputQuantity = 0;
-//         inputQuantity = document.getElementById('inputQuantity');
-//         return inputQuantity;
-// };
-
-// const arrayCartItems = (item) =>{
-//     cartItemsArray.push(item);
-//     numberOfCartItems(cartItemsArray);
-//     showCartItems(cartItemsArray);
-//     showCartDetails(cartItemsArray);
-//     let jsToString = JSON.stringify(cartItemsArray, cameraCartObject);
-//     console.log(jsToString);
-//     localStorage.setItem('arrayCartItems', jsToString);
-    // Ce code permet de stocker un ARRAY dans un local storage
-    // localStorage.setItem('arrayCartItems', JSON.stringify(cartItemsArray));
-    // let arrayCartItemsCallback = localStorage.getItem('arrayCartItems');
-    // arrayCartItemsCallback = JSON.parse(arrayCartItemsCallback);
-    // console.table(arrayCartItemsCallback);
-// };
