@@ -190,11 +190,7 @@ const validationFormulaireListener = () => {
                     email       : contactInfo.email
                 };
 
-                let contactToString = JSON.stringify(contact);
-                let productsToString = JSON.stringify(products);
-                let data = contactToString+productsToString;
                 //requete vers API pour donner les infos sur le client et le détail de la commande.
-
                 let url = 'http://localhost:3000/api/cameras/order';
                 fetch(url, {
                     method: 'POST',
@@ -217,7 +213,7 @@ const validationFormulaireListener = () => {
                     }
                 )
                 .catch(error => console.log('error', error))
-                .catch(e.preventDefault());
+                .catch(e.preventDefault())
                 ;
             };
         });
