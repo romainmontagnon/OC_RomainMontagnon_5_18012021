@@ -30,7 +30,7 @@
   line-height: 3rem;
 }
 
-#cartPrice div span {
+#cartPrice span span {
   padding: 0rem 0.5rem;
   font-weight: 700;
   background-color: #e2e3e5;
