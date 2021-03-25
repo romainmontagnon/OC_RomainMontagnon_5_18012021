@@ -72,7 +72,7 @@ const createLi = (item) =>{
                             <li><h6>Optique : </h6>`;
                             
                         for (let i = 0; i < item.lenses.length; i++) {
-                            html += `<p="ps-4">${item.lenses[i]}</p>`;                             
+                            html += `<p class="ps-4">${item.lenses[i]}</p>`;                             
                         };
                             
                             html +=`
