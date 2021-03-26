@@ -74,6 +74,7 @@ const numberOfCartItems = (arrayOfItems) => {
 const clearCart = () => {
     let itemsInCart = localStorage.getItem('arrayCartItems');
     itemsInCart = {};
+    cartItemsArray = new Array();
     let jsToString = JSON.stringify(itemsInCart, cameraCartObject);
 
     cartItemsParsed = 0;
