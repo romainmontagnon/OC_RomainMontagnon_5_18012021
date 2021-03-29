@@ -205,7 +205,7 @@ const validationFormulaireListener = () => {
                 .then((response) => response.json())
                 .then(
                     function(json){
-                        console.log(json.orderId);
+                        // console.log(json.orderId);
                         //1) recup ID
                         let id = json.orderId;
                         //2) page suivante

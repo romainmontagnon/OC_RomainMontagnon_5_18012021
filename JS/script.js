@@ -20,7 +20,7 @@ const showProductDetailFetch = () => {
                 return  response.json();
             })
             .then(function (result){
-                console.table(result);
+                //console.table(result);
                 productPageDetails(result);
             })
             .catch(error => console.log('error showProductDetailFetch', error))
@@ -101,7 +101,7 @@ const showProductsFetch = () =>{
             return  response.json();
         })
         .then(function (result){
-            console.table(result);
+            //console.table(result);
             showResult(result);
         })
         .catch(error => console.log('error showProductsFetch', error))

@@ -40,12 +40,12 @@ const storeToLocalStorage = (items) =>{
 };
 
 const resumeCartItems = (arrayOfItems) => {
-    console.table(arrayOfItems);
+    // console.table(arrayOfItems);
     if (arrayOfItems == ''){
         console.log('hello');
     } else{
         for (let i = 0; i < arrayOfItems.length; i++){
-            console.table(arrayOfItems[i]);
+            // console.table(arrayOfItems[i]);
             let object = {
                 name        : arrayOfItems[i].name,
                 _id         : arrayOfItems[i]._id,
@@ -55,7 +55,7 @@ const resumeCartItems = (arrayOfItems) => {
                 quantity    : arrayOfItems[i].quantity
             };
             cartItemsArray.push(object);
-            console.table(arrayOfItems);
+            // console.table(arrayOfItems);
         };
     };
     showCartItems(cartItemsArray);
@@ -111,7 +111,7 @@ const showNumberOfCartItems = (numberOfItems) => {
 };
 
 const showCartItems = (myArray) =>{
-    console.table(myArray);
+    // console.table(myArray);
     if (myArray == ''){
         console.log('le panier est vide');
         showEmptyCart('showCartItems');
@@ -143,7 +143,7 @@ const showCartItems = (myArray) =>{
 
 const showCartDetails = () =>{
     let items = cartItemsArray;
-    console.table(items);
+    // console.table(items);
     if (items == ''){
         console.log('la page panier est vide');
         showEmptyCart('showCartDetails');
